@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/anime-jox/static/css/main.073c9b0a.css",
-    "main.js": "/anime-jox/static/js/main.6f34f4f7.js",
+    "main.js": "/anime-jox/static/js/main.f0aafc77.js",
     "static/js/787.c6bbc79a.chunk.js": "/anime-jox/static/js/787.c6bbc79a.chunk.js",
     "static/media/logo.svg": "/anime-jox/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/anime-jox/index.html",
     "main.073c9b0a.css.map": "/anime-jox/static/css/main.073c9b0a.css.map",
-    "main.6f34f4f7.js.map": "/anime-jox/static/js/main.6f34f4f7.js.map",
+    "main.f0aafc77.js.map": "/anime-jox/static/js/main.f0aafc77.js.map",
     "787.c6bbc79a.chunk.js.map": "/anime-jox/static/js/787.c6bbc79a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.6f34f4f7.js"
+    "static/js/main.f0aafc77.js"
   ]
 }
