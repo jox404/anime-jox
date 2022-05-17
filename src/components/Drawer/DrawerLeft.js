@@ -1,19 +1,19 @@
-import { Search } from '@mui/icons-material';
+import { react, Component } from 'react';
+
+/* MUI COMPONENTS */
 import {
   Button,
   Divider,
-  IconButton,
   InputBase,
   List,
   ListItem,
-  OutlinedInput,
-  TextField,
   Typography,
+  Box
 } from '@mui/material';
-import { Box } from '@mui/system';
-import { react, Component } from 'react';
 /* CSS */
 import './style/drawerLeft.css';
+/* ICONS */
+import { Search } from '@mui/icons-material';
 
 class DrawerLeft extends Component {
   constructor(props) {
