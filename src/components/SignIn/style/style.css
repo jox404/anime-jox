@@ -1,3 +1,6 @@
+.containerSignIn {
+  background-color: #212121;
+}
 .alertContainer {
   position: absolute;
   display: flex;

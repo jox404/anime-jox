@@ -144,7 +144,7 @@ class Signin extends Component {
   render() {
     return (
       <>
-        <Box className='container'>
+        <Box className='containerSignIn'>
           <Box className='alertContainer' display={this.state.renderAlert}>
             <Alert severity={this.state.alertType} className='alert'>
               <AlertTitle sx={{ display: 'flex', justifyContent: 'space-between' }}>{this.state.alertText.title}

@@ -19,6 +19,9 @@ import { db } from '../../connections/firebase';
 import { cretateUser } from '../../connections/firebase';
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 
+/* CSS */
+import './style/style.css'
+
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -158,9 +161,9 @@ class SignUp extends Component {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            mt: 9,
           }}
           component='form'
+          className='containerSignUp'
         >
           <Avatar
             sx={{
