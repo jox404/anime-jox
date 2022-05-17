@@ -1,0 +1,14 @@
+.drawerProfile {
+  padding: 20px 0px 10px 10px;
+}
+.itemList {
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.itemList:hover {
+  transition: 0.2s;
+  background-color: #575757;
+  color: black;
+  /* font-weight: 450; */
+}

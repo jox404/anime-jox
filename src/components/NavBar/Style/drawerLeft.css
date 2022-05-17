@@ -1,0 +1,13 @@
+.menu {
+  color: #ed6c02;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: #ed6c02 1px solid;
+}
+.list {
+  background-color: #393e46;
+  color: #fff;
+}
+.searchField {
+  display: block;
+}

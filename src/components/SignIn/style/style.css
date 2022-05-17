@@ -1,0 +1,13 @@
+/* body {
+  background-color: #212121;
+  user-select: none;
+} */
+.alertContainer {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.alert {
+  max-width: 400px;
+}
