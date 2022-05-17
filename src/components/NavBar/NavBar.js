@@ -1,32 +1,29 @@
 import reactDom, { Component } from 'react';
-/* MUI COMPONENTS */
 
+/* MUI COMPONENTS */
 import {
   AppBar,
   Toolbar,
   Button,
   Box,
   Typography,
-  ThemeProvider,
   IconButton,
   Avatar,
   Container,
   Grid,
-  Link,
   InputBase,
 } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
-
 import './Style/style.css';
 /* DRAWER */
 import DrawerMenu from '../Drawer/Drawer';
-import DrawerRight from './DrawerRight';
-import DrawerLeft from './DrawerLeft';
+import DrawerRight from '../Drawer/DrawerRight';
+import DrawerLeft from '../Drawer/DrawerLeft';
 /* IMAGES */
 import logo from '../../img/logo-dark.png'
 /* ICONS */
 import MenuOpenDrawerIcon from '@mui/icons-material/Menu';
-import { Login, Menu, Search } from '@mui/icons-material';
+import { Search } from '@mui/icons-material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 /* FIRE BASE */
@@ -36,31 +33,7 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore'
-import DefaultTheme from '../Themes/DefaultTheme';
 
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#11468F',
-    },
-    secondary: {
-      main: '#FB3640',
-    },
-    error: {
-      main: '#FF0000',
-    },
-    info: {
-      main: '#FFC600',
-    },
-    main: {
-      main: '#393E46',
-    },
-    milk: {
-      main: '#F7F5F2',
-    },
-  },
-});
 
 class NavBar extends Component {
   constructor(props) {
@@ -126,8 +99,6 @@ class NavBar extends Component {
   }
   render() {
 
-    /* const logo = ['A', 'N', 'I', 'M', 'E']; */
-    const colors = ['#e83a14', '#ff6c09', '#fd922d', '#ff6c09', '#e83a14'];
     return (
       <>
         <Box >

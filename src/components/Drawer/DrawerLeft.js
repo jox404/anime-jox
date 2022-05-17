@@ -12,7 +12,8 @@ import {
 } from '@mui/material';
 import { Box } from '@mui/system';
 import { react, Component } from 'react';
-import './Style/drawerLeft.css';
+/* CSS */
+import './style/drawerLeft.css';
 
 class DrawerLeft extends Component {
   constructor(props) {

@@ -12,3 +12,7 @@
   color: black;
   /* font-weight: 450; */
 }
+.drawerBgColor {
+  background-color: #393e46;
+  height: 100%;
+}

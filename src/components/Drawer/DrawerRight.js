@@ -10,8 +10,8 @@ import {
   ListItem,
   Typography,
 } from '@mui/material';
-import '../Drawer/style/drawerMenu.css';
-import './Style/style.css';
+/* CSS */
+import './style/drawerMenu.css';
 //ICONS MUI
 import ProfileIcon from '@mui/icons-material/Person';
 import MylistIcon from '@mui/icons-material/FormatListBulleted';
