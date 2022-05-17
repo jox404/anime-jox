@@ -144,171 +144,173 @@ class Signin extends Component {
   render() {
     return (
       <>
-        <Box className='alertContainer' display={this.state.renderAlert}>
-          <Alert severity={this.state.alertType} className='alert'>
-            <AlertTitle sx={{ display: 'flex', justifyContent: 'space-between' }}>{this.state.alertText.title}
-              <IconButton size='small' onClick={() => this.closeAlertError()} sx={{ mt: '-6.5px' }} >
-                <Close />
-              </IconButton>
-            </AlertTitle>
-            {this.state.alertText.body}
-          </Alert>
-        </Box>
-        <Grid
-          container
-          component='main'
-          sx={{
-            minHeight: '100vh',
-            backgroundColor: '#212121',
-            color: 'dark',
-          }}
-        >
+        <Box className='container'>
+          <Box className='alertContainer' display={this.state.renderAlert}>
+            <Alert severity={this.state.alertType} className='alert'>
+              <AlertTitle sx={{ display: 'flex', justifyContent: 'space-between' }}>{this.state.alertText.title}
+                <IconButton size='small' onClick={() => this.closeAlertError()} sx={{ mt: '-6.5px' }} >
+                  <Close />
+                </IconButton>
+              </AlertTitle>
+              {this.state.alertText.body}
+            </Alert>
+          </Box>
           <Grid
-            item
-            lg={8}
-            xl={8}
+            container
+            component='main'
             sx={{
-              display: {
-                xs: 'none',
-                sm: 'none',
-                md: 'none',
-                lg: 'flex',
-                xl: 'flex',
-              },
-              backgroundImage:
-                `url(${bgImage})`,
-              backgroundSize: '100% 100vh',
-              backgroundRepeat: 'no-repeat',
-              minHeight: '100vh'
+              minHeight: '100vh',
+              /* backgroundColor: '#0611d6', */
+              color: 'dark',
             }}
-          />
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={12}
-            lg={4}
-            xl={4}
-            sx={{ mx: 0 }}
           >
-            <Box sx={{ textAlign: 'right' }}>
-              <IconButton variant='outlined' color='primary' onClick={() => this.backHome()}>
-                <LogoutRounded color='primary' />
-              </IconButton>
-            </Box>
-            <Box componet='form' sx={{ display: 'block', marginX: 'auto', paddingX: 1, marginTop: { xs: 5, sm: 15, md: 20, lg: 5, xl: 20 } }} id='formValidation' maxWidth={600}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  my: 2,
-                  p: 1,
-                }}
-              >
-                <Typography
-                  variant='h5'
-                  sx={{ color: blue[600] }}
-                  alignContent={'center'}
+            <Grid
+              item
+              lg={8}
+              xl={8}
+              sx={{
+                display: {
+                  xs: 'none',
+                  sm: 'none',
+                  md: 'none',
+                  lg: 'flex',
+                  xl: 'flex',
+                },
+                backgroundImage:
+                  `url(${bgImage})`,
+                backgroundSize: '100% 100vh',
+                backgroundRepeat: 'no-repeat',
+                minHeight: '100vh'
+              }}
+            />
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={12}
+              lg={4}
+              xl={4}
+              sx={{ mx: 0 }}
+            >
+              <Box sx={{ textAlign: 'right' }}>
+                <IconButton variant='outlined' color='primary' onClick={() => this.backHome()}>
+                  <LogoutRounded color='primary' />
+                </IconButton>
+              </Box>
+              <Box componet='form' sx={{ display: 'block', marginX: 'auto', paddingX: 1, marginTop: { xs: 5, sm: 15, md: 20, lg: 5, xl: 20 } }} id='formValidation' maxWidth={600}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    my: 2,
+                    p: 1,
+                  }}
                 >
-                  <Avatar
-                    sx={{
-                      width: 40,
-                      height: 40,
-                      bgcolor: blue[600],
-                      m: 1,
-                      ml: 2,
-                      color: '#212121',
-                    }}
+                  <Typography
+                    variant='h5'
+                    sx={{ color: blue[600] }}
+                    alignContent={'center'}
                   >
-                    <LockOutlined />
-                  </Avatar>
-                  Sign in
-                </Typography>
-              </Box>
-              <Box>
-                <Grid container item xs={12}>
-                  <Grid item xs={12}>
-                    <TextField
-                      value={this.state.email}
-                      onChange={this.handleChange}
-                      type='email'
-                      id='email'
-                      name='email'
-                      label='Email Address'
-                      fullWidth
-                      className=''
-                    />
-                  </Grid>
-                  <Grid item xs={12} mt={1}>
-                    <TextField
-                      value={this.state.password}
-                      onChange={this.handleChange}
-                      type={this.state.showPassword === true ? 'text' : 'password'}
-                      name='password'
-                      label='Password'
-                      fullWidth
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position='end' sx={{ display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex', xl: 'flex' } }}>
-                            <IconButton id='showPassword' onMouseUpCapture={() => this.hidePassword()} onMouseDownCapture={() => this.showPassword()}>
-                              {this.state.showPassword === true ? <VisibilityOff color='milk' /> : <VisibilityIcon color='milk' />}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
+                    <Avatar
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        bgcolor: blue[600],
+                        m: 1,
+                        ml: 2,
+                        color: '#212121',
                       }}
-                    />
-                  </Grid>
-
-                  <Grid item xs={12} mt={1}>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label='Remember me'
-                        checked={this.state.rememberMe}
-                        onChange={(e) => this.handleChangeRemenberMe(e)}
-                      ></FormControlLabel>
-                    </FormGroup>
-                  </Grid>
-                  <Grid item xs={12} sx={{ mx: 0, px: 0 }} mt={1}>
-                    <Button
-                      variant='contained'
-                      fullWidth
-                      onClick={() =>
-                        this.handleEmpyInput()
-                        /* this.handleSignIn(this.state.email, this.state.password) */
-                      }
                     >
-                      Sign in
-                    </Button>
+                      <LockOutlined />
+                    </Avatar>
+                    Sign in
+                  </Typography>
+                </Box>
+                <Box>
+                  <Grid container item xs={12}>
+                    <Grid item xs={12}>
+                      <TextField
+                        value={this.state.email}
+                        onChange={this.handleChange}
+                        type='email'
+                        id='email'
+                        name='email'
+                        label='Email Address'
+                        fullWidth
+                        className=''
+                      />
+                    </Grid>
+                    <Grid item xs={12} mt={1}>
+                      <TextField
+                        value={this.state.password}
+                        onChange={this.handleChange}
+                        type={this.state.showPassword === true ? 'text' : 'password'}
+                        name='password'
+                        label='Password'
+                        fullWidth
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position='end' sx={{ display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex', xl: 'flex' } }}>
+                              <IconButton id='showPassword' onMouseUpCapture={() => this.hidePassword()} onMouseDownCapture={() => this.showPassword()}>
+                                {this.state.showPassword === true ? <VisibilityOff color='milk' /> : <VisibilityIcon color='milk' />}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </Grid>
+
+                    <Grid item xs={12} mt={1}>
+                      <FormGroup>
+                        <FormControlLabel
+                          control={<Checkbox />}
+                          label='Remember me'
+                          checked={this.state.rememberMe}
+                          onChange={(e) => this.handleChangeRemenberMe(e)}
+                        ></FormControlLabel>
+                      </FormGroup>
+                    </Grid>
+                    <Grid item xs={12} sx={{ mx: 0, px: 0 }} mt={1}>
+                      <Button
+                        variant='contained'
+                        fullWidth
+                        onClick={() =>
+                          this.handleEmpyInput()
+                          /* this.handleSignIn(this.state.email, this.state.password) */
+                        }
+                      >
+                        Sign in
+                      </Button>
+                    </Grid>
+                    <Grid item container >
+                      <Grid item xs={12} sm={5} md={5} lg={5} xl={5}>
+                        <Typography textAlign={'left'}>
+                          <Link href='/anime-jox/#/resetpassword'>Forgot password?</Link>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12} sm={7} md={7} lg={7} xl={7}>
+                        <Typography sx={{ textAlign: { xs: 'left', sm: 'right', md: 'right', lg: 'right', xl: 'right' } }}>
+                          <Link href='/anime-jox/#/signup'>
+                            Don't have an account? Sign Up!
+                          </Link>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12} sx={{ marginTop: { xs: 20, sm: 20, md: 20, lg: 20, xl: 20 } }}>
+                        <Typography variant={'body2'} sx={{ color: '#606060' }} textAlign={'center'}>
+                          Copyright ©
+                          <Link href='/anime-jox/' color={'inherit'}>
+                            Your Website
+                          </Link>{' '}
+                          2022.
+                        </Typography>
+                      </Grid>
+                    </Grid>
                   </Grid>
-                  <Grid item container >
-                    <Grid item xs={12} sm={5} md={5} lg={5} xl={5}>
-                      <Typography textAlign={'left'}>
-                        <Link href='/anime-jox/#/resetpassword'>Forgot password?</Link>
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={7} md={7} lg={7} xl={7}>
-                      <Typography sx={{ textAlign: { xs: 'left', sm: 'right', md: 'right', lg: 'right', xl: 'right' } }}>
-                        <Link href='/anime-jox/#/signup'>
-                          Don't have an account? Sign Up!
-                        </Link>
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} sx={{ marginTop: { xs: 20, sm: 20, md: 20, lg: 20, xl: 20 } }}>
-                      <Typography variant={'body2'} sx={{ color: '#606060' }} textAlign={'center'}>
-                        Copyright ©
-                        <Link href='/anime-jox/' color={'inherit'}>
-                          Your Website
-                        </Link>{' '}
-                        2022.
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
+                </Box>
               </Box>
-            </Box>
+            </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </>
     );
   }
