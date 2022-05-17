@@ -13,7 +13,6 @@ import {
   Grid,
   InputBase,
 } from '@mui/material';
-import { createTheme } from '@mui/material/styles';
 import './Style/style.css';
 /* DRAWER */
 import DrawerMenu from '../Drawer/Drawer';
