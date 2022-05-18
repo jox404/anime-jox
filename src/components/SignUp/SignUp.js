@@ -9,6 +9,9 @@ import {
   Typography,
   Button,
   Link,
+  Alert,
+  AlertTitle,
+  IconButton,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { React, Component } from 'react';
@@ -17,10 +20,15 @@ import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
 /* FIRE BASE  */
 import { db } from '../../connections/firebase';
 import { cretateUser } from '../../connections/firebase';
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from 'firebase/auth';
 
 /* CSS */
-import './style/style.css'
+import './style/signUp.css';
+import { Close } from '@mui/icons-material';
 
 class SignUp extends Component {
   constructor(props) {
@@ -33,15 +41,31 @@ class SignUp extends Component {
       password: '',
       validForm: true,
       helperText: '',
-      firstNameError: false,
-      lastNameError: false,
       emailError: false,
       passwordError: false,
+      alertText: {
+        title: '',
+        body: '',
+      },
+      alert: {
+        status: false,
+        severity: 'error',
+      },
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.clearErro = this.clearErro.bind(this);
   }
+
+  validateLogin() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user !== null) {
+        window.location.assign('http://localhost:3000/');
+      }
+    });
+  }
+
   validateInput(name, value) {
     const inputName = name;
     const inputValue = value;
@@ -61,6 +85,31 @@ class SignUp extends Component {
       [name]: value,
     });
     this.validateInput(`${name}Error`, value);
+  }
+
+  alertMensage(title, body, severity) {
+    this.setState({
+      alertText: {
+        title: title,
+        body: body,
+      },
+      alert: {
+        status: true,
+        severity: severity,
+      },
+    })
+  }
+
+  closeAlertMensage() {
+    this.setState({
+      alertText: {
+        title: '',
+        body: '',
+      },
+      alert: {
+        status: false,
+      },
+    })
   }
 
   usersCollectionRef = collection(db, 'users');
@@ -101,7 +150,7 @@ class SignUp extends Component {
       .then((userCredendial) => {
         const user = userCredendial.user;
         const uid = userCredendial.user.uid;
-        setDoc(doc(db, "users", uid), {
+        setDoc(doc(db, 'users', uid), {
           firstName: this.state.firstName,
           lastName: this.state.lastName,
           email: this.state.email,
@@ -120,21 +169,20 @@ class SignUp extends Component {
             favorit: false,
             watched: false,
             dropped: false, */
-          }
-        }
-        ).then(() => {
-          window.alert('Registration successful')
-          window.location.replace('/')
-        })
+          },
+        }).then(() => {
+          window.alert('Registration successful');
+          window.location.replace('/');
+        });
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-      })
+        this.alertMensage('User Already Exists', 'A User Has Alredy Been Register with This Email Adress', 'error')
+      });
   }
 
   async clearErro() {
-
     if (this.state.validForm === false) {
       this.setState({
         helperText: '',
@@ -142,16 +190,8 @@ class SignUp extends Component {
       });
     }
   }
-  validateLogin() {
-    const auth = getAuth()
-    onAuthStateChanged(auth, (user) => {
-      if (user !== null) {
-        /* window.location.assign('http://localhost:3000/'); */
-      }
-    })
-  }
   componentDidMount() {
-    this.validateLogin()
+    this.validateLogin();
   }
   render() {
     return (
@@ -165,6 +205,17 @@ class SignUp extends Component {
           component='form'
           className='containerSignUp'
         >
+          <Box display={this.state.alert.status === true ? 'flex' : 'none'} className={'alertContainerSignUp'}>
+            <Alert severity={this.state.alert.severity}>
+              <Box className='alert'>
+                <AlertTitle>{this.state.alertText.title}</AlertTitle>
+                <IconButton onClick={() => this.closeAlertMensage()}>
+                  <Close />
+                </IconButton>
+              </Box>
+              {this.state.alertText.body}
+            </Alert>
+          </Box>
           <Avatar
             sx={{
               width: 40,
@@ -217,13 +268,8 @@ class SignUp extends Component {
                 type={'email'}
                 fullWidth
                 value={this.state.email}
-                onChange={(e) =>
-                  this.setState({
-                    email: e.target.value,
-                  })
-                }
-                onClick={this.clearErro}
                 error={this.state.emailError}
+                onChange={this.handleChange}
                 helperText={this.state.helperText}
               />
             </Grid>

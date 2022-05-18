@@ -1,0 +1,20 @@
+.containerSignUp {
+  background-color: #212121;
+  margin-top: 0px;
+  padding-top: 90px;
+  width: 100%;
+  height: 100vh;
+}
+
+.alertContainerSignUp {
+  position: absolute;
+  margin-top: -85px;
+  z-index: 2;
+}
+.alert {
+  display: flex;
+  justify-content: space-between;
+}
+.alert button {
+  margin-top: -10px;
+}
