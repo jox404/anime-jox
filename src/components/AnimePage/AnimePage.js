@@ -26,7 +26,7 @@ import {
 } from '@mui/icons-material';
 import Footer from '../Footer/Footer';
 import { ref } from 'firebase/storage';
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../connections/firebase';
 import { getAuth } from 'firebase/auth';
 import { render } from '@testing-library/react';
@@ -41,7 +41,7 @@ class AnimePageComponent extends Component {
         super(props);
 
         this.state = {
-            userUid: 'j5pg3pRFtwWOayVOe95gLgkTNql2',
+            userUid: 'gtsk0ZYtJSRB0eTSrXhkwizVaec2',
             season: '',
             studio: '',
             episodes: '',
@@ -111,15 +111,7 @@ class AnimePageComponent extends Component {
             });
     }
 
-    /* async setUid() {
-        const uid = getAuth().currentUser.uid
-        this.setState({
-            userUid: uid
-        })
-    } */
-
     async getElementStatus() {
-        /* await this.setUid */
         const docRef = doc(db, 'users', this.state.userUid);
 
         await getDoc(docRef).then((res) => {
@@ -213,7 +205,6 @@ class AnimePageComponent extends Component {
 
     async handleStatusElement(value, element) {
 
-
         const docRef = doc(db, 'users', this.state.userUid);
 
         const idUrl = this.props.idUrl.toLocaleString();
@@ -232,13 +223,11 @@ class AnimePageComponent extends Component {
 
         if (value === true) {
             const newGlobalValue = oldValueGlobal + 1;
-
-            console.log(oldValueGlobal)
             updateDoc(globalDocRef, {
                 [`animeList.${idUrl}.${element}`]: newGlobalValue,
             })
 
-            this.getElementGlobalStatus();
+            this.getElementGlobalStatus();///atualiza o this.state
         } else {
             const newGlobalValue = oldValueGlobal - 1;
 
@@ -246,20 +235,17 @@ class AnimePageComponent extends Component {
                 [`animeList.${idUrl}.${element}`]: newGlobalValue,
             })
 
-            this.getElementGlobalStatus();
+            this.getElementGlobalStatus();///atualiza o this.state
         }
         //atualiza a lista "InfoAnimes" do usuario
-        const oldValue = parseInt(this.state.animesInfo[element].integerValue)
         if (value === true) {
-            const newValue = oldValue + 1
             await updateDoc(docRef, {
-                [`animesInfo.${element}`]: newValue,
+                [`animesInfo.${element}`]: arrayUnion(`${this.props.idUrl}`),
             })
             this.getElementStatus()//atualiza o this.state
         } else {
-            const newValue = oldValue - 1
             await updateDoc(docRef, {
-                [`animesInfo.${element}`]: newValue,
+                [`animesInfo.${element}`]: arrayRemove(`${this.props.idUrl}`)
             })
             this.getElementStatus()//atualiza o this.state
         }

@@ -3,7 +3,7 @@ import { Component, React } from 'react';
 import NavBar from '../NavBar/NavBar';
 import Section from '../Section/Section';
 
-class HomePage extends Component {
+class Famous extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -14,10 +14,10 @@ class HomePage extends Component {
       <>
         <Box>
           <NavBar />
-          <Section />
+          <Section title={'THE MONST FAMOUS'} sort={'popularityRank'} />
         </Box>
       </>
     );
   }
 }
-export default HomePage;
+export default Famous;

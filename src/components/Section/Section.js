@@ -23,10 +23,9 @@ import {
   setPersistence,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { getStorage, ref, uploadBytes } from 'firebase/storage'
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
 import Footer from '../Footer/Footer';
-
-
+import { grey } from '@mui/material/colors';
 
 class Section extends Component {
   constructor(props) {
@@ -45,7 +44,7 @@ class Section extends Component {
     });
     var initialPage = currentPage * limitItems - limitItems;
     await fetch(
-      `https://kitsu.io/api/edge/anime?page[limit]=${limitItems}&page[offset]=${initialPage}`,
+      `https://kitsu.io/api/edge/anime?page[limit]=${limitItems}&page[offset]=${initialPage}&sort=${this.props.sort}`,
       { method: 'get' }
     )
       .then((res) => {
@@ -55,13 +54,13 @@ class Section extends Component {
         return res.data;
       })
       .then((res) => {
-        var arrayItem = []
+        var arrayItem = [];
         res.map((item) => {
-          arrayItem.push(item)
+          arrayItem.push(item);
         });
-        console.log('arrayItem', arrayItem)
+        console.log('arrayItem', arrayItem);
         this.setState({
-          paginationAnimes: arrayItem
+          paginationAnimes: arrayItem,
         });
       })
       .then(() => {
@@ -100,7 +99,7 @@ class Section extends Component {
             align='center'
             sx={{ paddingTop: 2, paddingBottom: 2 }}
           >
-            RELEASES OF THE WEEK
+            {this.props.title}
           </Typography>
           <Divider sx={{ marginBottom: 2 }} />
           <Box sx={{ minHeight: 900 }}>
@@ -120,6 +119,7 @@ class Section extends Component {
               />
               {paginationItems.map((anime, index) => {
                 const data = {
+                  /* Fazer tratamento para quando não encontrar algum dado dos itens abaixo*/
                   name:
                     anime.attributes.titles.en_jp === undefined || null
                       ? anime.attributes.titles.en_us === undefined || null
@@ -128,12 +128,25 @@ class Section extends Component {
                           : anime.attributes.titles.en
                         : anime.attributes.titles.en_us
                       : anime.attributes.titles.en_jp,
-                  bgImage: anime.attributes.posterImage.large,
+                  bgImage:
+                    anime.attributes.posterImage === null ? 'https://media.kitsu.io/anime/poster_images/9299/large.jpg' :
+                      anime.attributes.posterImage.small === null ?
+                        anime.attributes.posterImage.large === null
+                          ? anime.attributes.posterImage.medium ===
+                            null
+                            ? anime.attributes.posterImage.original ===
+                              null
+                              ? anime.attributes.posterImage.tiny === null ? 'Não encontrou nada'
+                                : anime.attributes.posterImage.tiny
+                              : anime.attributes.posterImage.original
+                            : anime.attributes.posterImage.medium
+                          : anime.attributes.posterImage.large
+                        : anime.attributes.posterImage.small,
                   synopsis:
                     anime.attributes.synopsis === ''
                       ? "Sorry, We don't have a synopsis for this anime"
                       : anime.attributes.synopsis,
-                  id: anime.id
+                  id: anime.id,
                 };
 
                 return (
@@ -173,10 +186,9 @@ class Section extends Component {
               </Button>
             </ButtonGroup>
           </Box>
-
         </Container>
-        <Box sx={{ justifyContent: 'space-around', display: 'flex' }}>
-          <Footer bgColor={"#95989c"} color={"#F7F5F2"} dividerColor={"#gferty"} />
+        <Box sx={{ justifyContent: 'end', display: 'flex' }}>
+          <Footer />
         </Box>
       </>
     );

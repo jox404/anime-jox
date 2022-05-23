@@ -44,8 +44,10 @@ class CustomizedSearch extends Component {
     window.scrollTo(0, 0);
     const filterLink =
       link === undefined
-        ? `https://kitsu.io/api/edge/anime?filter%5B${filterBy}%5D=${filters}&page%5Blimit%5D=${limitPerPage}&page%5Boffset%5D=0`
-        /*   `https://kitsu.io/api/edge/anime?filter%5B${filterBy}%5D=${filters}&page%5Blimit%5D=${limitPerPage}&page%5Boffset%5D=0` */
+        ? `https://kitsu.io/api/edge/anime?filter%5B${filterBy}%5D=${filters}&page%5Blimit%5D=${limitPerPage}&page%5Boffset%5D=0&sort=popularityRank`
+        /*   https://kitsu.io/api/edge/anime?filter%5Bgenres%5D=comedy&page%5Blimit%5D=8&page%5Boffset%5D=0 */
+
+        /* 'genres', 'comedy', 8, undefined */
         : link;
     const currentPage =
       parseInt(
@@ -151,7 +153,6 @@ class CustomizedSearch extends Component {
           sx={{
             marginTop: 7,
             paddingTop: 2,
-            bgcolor: '#95989c',
           }}
         >
           <Typography textAlign={'center'} variant='h5' mb={2}>

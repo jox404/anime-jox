@@ -83,12 +83,10 @@ class NavBar extends Component {
             profileImage: data.profileImage.stringValue,
           })
         })
-        console.log("User is sign In")
       } else {
         this.setState({
           signIn: false,
         })
-        console.log("User is signed out")
       }
     })
 
@@ -155,20 +153,17 @@ class NavBar extends Component {
                         }}
                         component='div'
                       >
-                        <a className='navItem' href='###' id='releases'>
-                          Releases
-                        </a>
-                        <a className='navItem' href='###' id='mostViewed'>
-                          Most Viewed
+                        <a className='navItem' href='/#/Famous' id='mostViewed'>
+                          Famous
                         </a>
                         <a
                           className='navItem'
-                          href='/anime-jox/#/customizedSearch'
+                          href='/#/customizedSearch'
                           id='customizedSearch'
                         >
                           Customized Search
                         </a>
-                        <a className='navItem' href='###' id='theBest'>
+                        <a className='navItem' href='/#/thebest' id='theBest'>
                           The Best
                         </a>
                       </Typography>

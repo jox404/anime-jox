@@ -144,7 +144,8 @@ class SignUp extends Component {
     });
   } */
 
-  async cretateUser(email, password) {
+  async cretateUser(e, email, password) {
+    e.preventDefault()
     const auth = getAuth();
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredendial) => {
@@ -157,11 +158,11 @@ class SignUp extends Component {
           backgroundImage: '',
           profileImage: '',
           animesInfo: {
-            dropped: 0,
-            favorit: 0,
-            seeLater: 0,
-            watched: 0,
-            watching: 0,
+            dropped: [],
+            favorit: [],
+            seeLater: [],
+            watched: [],
+            watching: [],
           },
           animeList: {
             /* seeLater: false,
@@ -172,7 +173,7 @@ class SignUp extends Component {
           },
         }).then(() => {
           window.alert('Registration successful');
-          window.location.replace('/');
+          /* window.location.replace('/'); */
         });
       })
       .catch((error) => {
@@ -191,7 +192,7 @@ class SignUp extends Component {
     }
   }
   componentDidMount() {
-    this.validateLogin();
+    /* this.validateLogin(); */
   }
   render() {
     return (
@@ -298,8 +299,8 @@ class SignUp extends Component {
                 color='primary'
                 fullWidth
                 type='button'
-                onClick={() =>
-                  this.cretateUser(this.state.email, this.state.password)
+                onClick={(e) =>
+                  this.cretateUser(e, this.state.email, this.state.password)
                 }
               >
                 SIGN UP

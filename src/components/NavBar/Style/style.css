@@ -33,7 +33,7 @@ a {
   text-decoration-style: none;
 
   transition: 0.5s;
-  border-bottom: #393e46 solid 1px;
+  border-bottom: #212121 solid 1px;
 }
 .navItem:hover {
   border-bottom: #e83a14 solid 1px;

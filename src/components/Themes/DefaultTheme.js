@@ -5,8 +5,8 @@ import { dark } from '@mui/material/styles/createPalette';
 const DefaultTheme = createTheme({
   palette: {
     background: {
-      default: grey[500],
-      paper: grey[500],
+      default: grey[800],
+      paper: grey[800],
     },
     text: {
       primary: '#fff',
