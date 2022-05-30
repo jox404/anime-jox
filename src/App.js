@@ -12,6 +12,7 @@ import ResetPassword from './components/ResetPassword/ResetPassword';
 import Famous from './components/Famous/Famous';
 import TheBest from './components/TheBest/TheBest';
 import AnimesInfo from './components/AnimesInfo/AnimesInfo';
+import PageError from './components/PageError/PageError';
 
 function App() {
   return (
@@ -30,8 +31,7 @@ function App() {
             <Route path='/TheBest' element={<TheBest />} />
             <Route path='/Profile' element={<Profile />} />
             <Route path='/animesInfo' element={<AnimesInfo />} />
-
-
+            <Route path='/PageError/:code' element={<PageError />} />
           </Routes>
         </HashRouter>
       </ThemeProvider>

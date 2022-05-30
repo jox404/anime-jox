@@ -152,11 +152,12 @@ class Profile extends Component {
         })
     }
 
-    openModal(animesIdArray, title, color) {
+    async openModal(animesIdArray, title, color) {
         var animesId = []
         animesIdArray.map((e) => {
             animesId.push(e.stringValue)
         })
+        console.log('chamou01')
         this.setState({
             modalOpen: true,
             animesId: animesId,
@@ -254,19 +255,16 @@ class Profile extends Component {
                                         </Box>
                                     </Grid>
                                     <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
-
-                                        <Box>
+                                        <Box sx={{ textJustify: 'center' }}>
                                             <Typography color={'primary'} variant="h6">ANIME INFORMATION</Typography>
                                             <List>
-                                                <ListItem><AccessTime color="error" /> <Typography ml={1} className={'userInfo'}><Button onClick={() => this.openModal(this.state.animesInfo.seeLater, 'LATER', "#606060")}>OPEN MODAL</Button>Later : {this.state.animesInfo.seeLater.length}</Typography></ListItem>
-                                                <ListItem><Visibility /><Typography ml={1} className={'userInfo'}><Button onClick={() => this.openModal(this.state.animesInfo.watching, 'WATCHING', "#606060")}>OPEN MODAL</Button>Watching  : {this.state.animesInfo.watching.length}</Typography></ListItem>
-                                                <ListItem><Star color='yellow' /> <Typography ml={1} className={'userInfo'}><Button onClick={() => this.openModal(this.state.animesInfo.favorit, 'FAVORITES', "#606060")}>OPEN MODAL</Button>Favorites : {this.state.animesInfo.favorit.length}</Typography></ListItem>
-                                                <ListItem><HistorySharp color='teal' />  <Typography ml={1} className={'userInfo'}><Button onClick={() => this.openModal(this.state.animesInfo.watched, 'WATCHED', "#606060")}>OPEN MODAL</Button>Watched : {this.state.animesInfo.watched.length}</Typography></ListItem>
-                                                <ListItem><Delete color='secondary' /> <Typography ml={1} className={'userInfo'}><Button onClick={() => this.openModal(this.state.animesInfo.dropped, 'DROPPED', "#606060")}>OPEN MODAL</Button>Dropped : {this.state.animesInfo.dropped.length} </Typography></ListItem>
+                                                <ListItem className="listItem"><Button onClick={() => this.openModal(this.state.animesInfo.favorit, 'FAVORITES', "#F8B400")} color={"milk"} endIcon={<Star color="yellow" />} variant={'contained'} fullWidth>favorit {this.state.animesInfo.favorit.length}</Button></ListItem>
+                                                <ListItem className="listItem"><Button onClick={() => this.openModal(this.state.animesInfo.watched, 'WATCHED', "#069A8E")} color={"milk"} endIcon={<HistorySharp color="teal" />} variant={'contained'} fullWidth>watched {this.state.animesInfo.watched.length}</Button></ListItem>
+                                                <ListItem className="listItem"><Button onClick={() => this.openModal(this.state.animesInfo.watching, 'WATCHING', "#505050")} color={"milk"} endIcon={<Visibility color="white" />} variant={'contained'} fullWidth>Watching {this.state.animesInfo.watching.length}</Button></ListItem>
+                                                <ListItem className="listItem"><Button onClick={() => this.openModal(this.state.animesInfo.seeLater, 'LATER', "#1976d2")} color={"milk"} endIcon={<AccessTime color="darkBlue" />} variant={'contained'} fullWidth>Later {this.state.animesInfo.seeLater.length}</Button></ListItem>
+                                                <ListItem className="listItem"><Button onClick={() => this.openModal(this.state.animesInfo.dropped, 'DROPPED', "#FF2626")} color={"milk"} endIcon={<Delete color="secondary" />} variant={'contained'} fullWidth>Dropped {this.state.animesInfo.dropped.length}</Button></ListItem>
                                             </List>
-
                                         </Box>
-
                                     </Grid>
                                 </Grid>
                             </Box>

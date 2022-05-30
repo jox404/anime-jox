@@ -26,7 +26,7 @@ import {
 } from '@mui/icons-material';
 import Footer from '../Footer/Footer';
 import { ref } from 'firebase/storage';
-import { arrayRemove, arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, collection, doc, getDoc, getDocs, limit, orderBy, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import { db } from '../../connections/firebase';
 import { getAuth } from 'firebase/auth';
 import { render } from '@testing-library/react';
@@ -52,6 +52,7 @@ class AnimePageComponent extends Component {
             imgAnime: '',
             title: '',
             slug: '',
+            averageRating: '',
             alternativeTitle: '',
             seeLater: false,
             watching: false,
@@ -93,6 +94,7 @@ class AnimePageComponent extends Component {
                     alternativeTitle:
                         titles.ja_jp === undefined ? titles.en_jp : titles.ja_jp,
                     slug: res.data.attributes.slug,
+                    averageRating: res.data.attributes.averageRating,
                 };
 
                 this.setState({
@@ -107,8 +109,11 @@ class AnimePageComponent extends Component {
                     title: data.title,
                     alternativeTitle: data.alternativeTitle,
                     slug: data.slug,
+                    averageRating: data.averageRating
                 });
-            });
+            }).catch((error) => {
+                window.location.replace('#/pageError/404')
+            })
     }
 
     async getElementStatus() {
@@ -160,47 +165,78 @@ class AnimePageComponent extends Component {
     }
 
     async getElementGlobalStatus(value) {
-        const globalRef = doc(db, 'users', 'global');
+        const globalRef = doc(db, 'global/', this.props.idUrl);
 
-        await getDoc(globalRef).then((res) => {
-            const animeId = this.props.idUrl;
-
-            const dataExists =
-                res._document.data.value.mapValue.fields.animeList.mapValue.fields[
-                    animeId
-                ] === undefined
-                    ? false
-                    : true;
-
-            if (dataExists == true) {
-                getDoc(globalRef).then((res) => {
-                    const data =
-                        res._document.data.value.mapValue.fields.animeList.mapValue.fields[
-                            animeId
-                        ].mapValue.fields;
-                    this.setState({
-                        global: {
-                            dropped: data.dropped.integerValue,
-                            favorit: data.dropped.integerValue,
-                            seeLater: data.dropped.integerValue,
-                            watched: data.dropped.integerValue,
-                            watching: data.dropped.integerValue,
-                        },
-                    });
-                });
-            } else {
-                updateDoc(globalRef, {
-                    [`animeList.${animeId}`]: {
+        const getGlobalDoc = await getDoc(globalRef)
+        if (getGlobalDoc._document === null || undefined) {
+            setDoc(globalRef, {
+                idUrl: {
+                    metrics: {
                         dropped: 0,
                         favorit: 0,
                         seeLater: 0,
                         watched: 0,
                         watching: 0,
-                    },
-                });
-                this.getElementGlobalStatus();
-            }
-        });
+                    }
+                }
+            })
+
+            this.getElementGlobalStatus()
+        } else {
+
+            await getDoc(globalRef).then(async (res) => {
+                const animeId = this.props.idUrl;
+
+                /* const dataExists =
+                    res._document.data.value.mapValue.fields.animeList.mapValue.fields[
+                        animeId
+                    ] === undefined
+                        ? false
+                        : true; */
+
+                /* const collectionGlobalRef = collection(db, "global")
+                const q = query(collectionGlobalRef, where("idUrl.metrics.dropped", "==", 0))
+                const order = query(collectionGlobalRef, orderBy("idUrl.metrics.favorit", "desc"))
+                const querySnapshot = await getDocs(order)
+                querySnapshot.forEach((doc) => {
+                    console.log(doc.id, " => ", doc.data())
+                }) */
+                /* console.log('order', order) */
+                /* console.log('q', querySnapshot, q) */
+
+                /* if (dataExists == true) {
+                    getDoc(globalRef).then((res) => {
+                        const data =
+                            res._document.data.value.mapValue.fields.animeList.mapValue.fields[
+                                animeId
+                            ].mapValue.fields;
+                        this.setState({
+                            global: {
+                                dropped: data.dropped.integerValue,
+                                favorit: data.dropped.integerValue,
+                                seeLater: data.dropped.integerValue,
+                                watched: data.dropped.integerValue,
+                                watching: data.dropped.integerValue,
+                            },
+                        });
+                    });
+                } else {
+                    updateDoc(globalRef, {
+                        [`animeList.${animeId}`]: {
+                            dropped: 0,
+                            favorit: 0,
+                            seeLater: 0,
+                            watched: 0,
+                            watching: 0,
+                        },
+                    });
+                    this.getElementGlobalStatus();
+                } */
+            })
+
+        }
+
+        /* ; */
     }
 
     async handleStatusElement(value, element) {
@@ -286,7 +322,7 @@ class AnimePageComponent extends Component {
                                 <img src={this.state.imgAnime} width={300} height={400}></img>
                             </Grid>
                             <Grid item xs={0} sm={5} md={4} lg={6} sx={{ display: { xs: 'none', sm: 'inline-flex', md: 'none', lg: 'none', xl: 'none' }, marginTop: 0 }}>
-                                <Score numberReviews={500} rating={8.5} />
+                                <Score averageRating={this.state.averageRating} />
                             </Grid>
                             <Grid item xs={12} sm={12} md={8} lg={8}>
                                 <Grid
@@ -300,7 +336,7 @@ class AnimePageComponent extends Component {
                                         </Box>
                                     </Grid>
                                     <Grid item xs={12} sm={12} md={4} lg={6} sx={{ display: { xs: 'inline-flex', sm: 'none', md: 'inline-flex', lg: 'inline-flex', } }}>
-                                        <Score numberReviews={500} rating={8.5} />
+                                        <Score averageRating={this.state.averageRating} />
                                     </Grid>
                                     <Grid item xs={10} sm={12} md={12} lg={12}>
                                         <Box>

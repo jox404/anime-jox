@@ -26,6 +26,9 @@ const DefaultTheme = createTheme({
     },
     milk: {
       main: '#F7F5F2',
+      dark: '#d4d2cf',
+      light: '#ffffff',
+      contrastText: '#212121',
     },
     teal: {
       main: '#069A8E'
