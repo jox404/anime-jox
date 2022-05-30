@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/anime-jox/static/css/main.8f9f2acf.css",
-    "main.js": "/anime-jox/static/js/main.06e89844.js",
+    "main.css": "/anime-jox/static/css/main.cb55ea93.css",
+    "main.js": "/anime-jox/static/js/main.0cc0f987.js",
     "static/js/787.c6bbc79a.chunk.js": "/anime-jox/static/js/787.c6bbc79a.chunk.js",
     "static/media/kazetachinu050.jpg": "/anime-jox/static/media/kazetachinu050.3bb6c7afce768030a742.jpg",
     "static/media/logo-dark.png": "/anime-jox/static/media/logo-dark.2b52a300875d07c2cace.png",
     "index.html": "/anime-jox/index.html",
-    "main.8f9f2acf.css.map": "/anime-jox/static/css/main.8f9f2acf.css.map",
-    "main.06e89844.js.map": "/anime-jox/static/js/main.06e89844.js.map",
+    "main.cb55ea93.css.map": "/anime-jox/static/css/main.cb55ea93.css.map",
+    "main.0cc0f987.js.map": "/anime-jox/static/js/main.0cc0f987.js.map",
     "787.c6bbc79a.chunk.js.map": "/anime-jox/static/js/787.c6bbc79a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8f9f2acf.css",
-    "static/js/main.06e89844.js"
+    "static/css/main.cb55ea93.css",
+    "static/js/main.0cc0f987.js"
   ]
 }
