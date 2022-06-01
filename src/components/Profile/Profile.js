@@ -184,10 +184,10 @@ class Profile extends Component {
                         <AnimesInfo title={this.state.modalTitle} color={this.state.modalColor} animesId={[this.state.animesId]} />
                     </Box>
                 </Modal>
-                <Box sx={{ height: '100vh' }}>
+                <Box sx={{ maxHeight: '100vh' }}>
                     <NavBar />
 
-                    <Box className="profileBody" sx={{ maxHeight: { xs: '100vh', sm: '90vh', md: '90vh', lg: '90vh', xl: '85vh' } }} >
+                    <Box className="profileBody" sx={{ minHeight: { xs: '120vh', sm: '100vh', md: '100vh', lg: '100vh', xl: '80vh' } }} >
 
                         <Box sx={{
                             height: { xs: 200, sm: 350, md: 300, lg: 350, xl: 450 },
@@ -267,16 +267,17 @@ class Profile extends Component {
                                         </Box>
                                     </Grid>
                                 </Grid>
-                            </Box>
+                            </Box >
 
-                        </Container>
+                        </Container >
 
 
-                    </Box>
-                    <Box sx={{ justifyContent: 'end', display: 'flex' }}>
+                    </Box >
+                    <Box sx={{/*  justifyContent: 'end', display: 'flex' */ }}>
                         <Footer />
                     </Box>
-                </Box>
+                </Box >
+
             </>
         )
     }

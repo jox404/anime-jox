@@ -143,44 +143,54 @@ class SignUp extends Component {
         : this.handleError();
     });
   } */
+  validadeEmail(email) {
+    var model = /\S+@\S+\.\S+/;
+    return model.test(email)
+  }
 
   async cretateUser(e, email, password) {
     e.preventDefault()
-    const auth = getAuth();
-    await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredendial) => {
-        const user = userCredendial.user;
-        const uid = userCredendial.user.uid;
-        setDoc(doc(db, 'users', uid), {
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
-          email: this.state.email,
-          backgroundImage: '',
-          profileImage: '',
-          animesInfo: {
-            dropped: [],
-            favorit: [],
-            seeLater: [],
-            watched: [],
-            watching: [],
-          },
-          animeList: {
-            /* seeLater: false,
-            watching: false,
-            favorit: false,
-            watched: false,
-            dropped: false, */
-          },
-        }).then(() => {
-          window.alert('Registration successful');
-          /* window.location.replace('/'); */
+    if (this.validadeEmail(email)) {
+
+
+      const auth = getAuth();
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredendial) => {
+          const user = userCredendial.user;
+          const uid = userCredendial.user.uid;
+          setDoc(doc(db, 'users', uid), {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            backgroundImage: '',
+            profileImage: '',
+            animesInfo: {
+              dropped: [],
+              favorit: [],
+              seeLater: [],
+              watched: [],
+              watching: [],
+            },
+            animeList: {
+              /* seeLater: false,
+              watching: false,
+              favorit: false,
+              watched: false,
+              dropped: false, */
+            },
+          }).then(() => {
+            window.alert('Registration successful');
+            /* window.location.replace('/'); */
+          });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          this.alertMensage('User Already Exists', 'A User Has Alredy Been Register with This Email Adress', 'error')
         });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        this.alertMensage('User Already Exists', 'A User Has Alredy Been Register with This Email Adress', 'error')
-      });
+    } else {
+      this.alertMensage('Invalid Email Address', 'This Email Address Is Not Valid', 'error')
+    }
   }
 
   async clearErro() {
@@ -195,6 +205,7 @@ class SignUp extends Component {
     /* this.validateLogin(); */
   }
   render() {
+
     return (
       <>
         <Box
@@ -308,7 +319,7 @@ class SignUp extends Component {
             </Grid>
             <Grid item container justifyContent={'flex-end'}>
               <Typography variant='body2'>
-                <Link href='http://localhost:3000/signin'>
+                <Link href='/anime-jox/#/signin'>
                   Already have an account? Sign in
                 </Link>
               </Typography>

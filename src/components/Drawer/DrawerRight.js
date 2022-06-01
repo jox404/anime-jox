@@ -72,26 +72,27 @@ class DrawerRight extends Component {
               </ListItem>
             </a>
             <Divider />
-            <ListItem className='itemList'>
+            <ListItem className='itemListDisebled'>
               <MylistIcon sx={{ mr: 1 }} />
               My Manga List
             </ListItem>
             <Divider />
-            <ListItem className='itemList'>
+            <ListItem className='itemListDisebled'>
               <FavoritesIcon sx={{ mr: 1 }} />
               Favorites Manga
             </ListItem>
             <Divider />
-            <ListItem className='itemList'>
+            <ListItem className='itemListDisebled'>
               <SeeLaterIcon sx={{ mr: 1 }} />
               See Later
             </ListItem>
             <Divider />
-            <ListItem className='itemList'>
+            <ListItem className='itemListDisebled'>
               <DroppedIcon sx={{ mr: 1 }} />
               Dropped
             </ListItem>
-            <ListItem className='itemList'>
+            <Divider />
+            <ListItem className='itemListDisebled'>
               <HistoryIcon sx={{ mr: 1 }} />
               History
             </ListItem>

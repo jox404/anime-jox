@@ -40,27 +40,11 @@ class DrawerLeft extends Component {
               </Button>
             </Box>
             <Divider />
-            <ListItem className='itemList'>Releases</ListItem>
-            <Divider />
-            <ListItem className='itemList'>Most Viewed</ListItem>
+            <ListItem className='itemList' onClick={() => { this.handleRedirect("/anime-jox/#/Famous") }}>Famous</ListItem>
             <Divider />
             <ListItem className='itemList' onClick={() => { this.handleRedirect("/anime-jox/#/customizedSearch") }}>Customized search</ListItem>
             <Divider />
-            <ListItem className='itemList'>Best of The Day</ListItem>
-            <Divider />
-            <ListItem className='itemList'>Best of The Week</ListItem>
-            <Divider />
-            {this.props.subscribe === true ? (
-              `${''}`
-            ) : (
-              <Box
-                sx={{ justifyContent: 'space-around', display: 'flex', mt: 3 }}
-              >
-                <Button variant='outlined' color='secondary'>
-                  SUBSCRIBE
-                </Button>
-              </Box>
-            )}
+            <ListItem className='itemList' onClick={() => { this.handleRedirect("/anime-jox/#/thebest") }}>The Best</ListItem>
           </List>
         </Box>
       </>

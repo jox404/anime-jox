@@ -5,7 +5,10 @@
   transition: 0.5s;
   cursor: pointer;
 }
-
+.itemListDisebled {
+  background-color: #575757;
+  color: white;
+}
 .itemList:hover {
   transition: 0.2s;
   background-color: #575757;

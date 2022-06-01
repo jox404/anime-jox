@@ -153,17 +153,17 @@ class NavBar extends Component {
                         }}
                         component='div'
                       >
-                        <a className='navItem' href='/#/Famous' id='mostViewed'>
+                        <a className='navItem' href='/anime-jox/#/Famous' id='mostViewed'>
                           Famous
                         </a>
                         <a
                           className='navItem'
-                          href='/#/customizedSearch'
+                          href='/anime-jox/#/customizedSearch'
                           id='customizedSearch'
                         >
                           Customized Search
                         </a>
-                        <a className='navItem' href='/#/thebest' id='theBest'>
+                        <a className='navItem' href='/anime-jox/#/thebest' id='theBest'>
                           The Best
                         </a>
                       </Typography>

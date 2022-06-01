@@ -121,13 +121,16 @@ class Section extends Component {
                 const data = {
                   /* Fazer tratamento para quando não encontrar algum dado dos itens abaixo*/
                   name:
-                    anime.attributes.titles.en_jp === undefined || null
-                      ? anime.attributes.titles.en_us === undefined || null
-                        ? anime.attributes.titles.en === undefined || null
-                          ? anime.attributes.titles.ja_jp
-                          : anime.attributes.titles.en
-                        : anime.attributes.titles.en_us
-                      : anime.attributes.titles.en_jp,
+                    anime.attributes.slug === undefined || null
+                      ?
+                      anime.attributes.titles.en_jp === undefined || null
+                        ? anime.attributes.titles.en_us === undefined || null
+                          ? anime.attributes.titles.en === undefined || null
+                            ? anime.attributes.titles.ja_jp
+                            : anime.attributes.titles.en
+                          : anime.attributes.titles.en_us
+                        : anime.attributes.titles.en_jp
+                      : anime.attributes.slug,
                   bgImage:
                     anime.attributes.posterImage === null ? 'https://media.kitsu.io/anime/poster_images/9299/large.jpg' :
                       anime.attributes.posterImage.small === null ?

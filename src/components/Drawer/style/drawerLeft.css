@@ -11,3 +11,14 @@
 .searchField {
   display: block;
 }
+.itemList {
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.itemList:hover {
+  transition: 0.2s;
+  background-color: #393e46;
+  color: black;
+  /* font-weight: 450; */
+}

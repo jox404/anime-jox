@@ -21,7 +21,7 @@ function App() {
         <CssBaseline />
         <HashRouter>
           <Routes>
-            <Route path='/' element={<TheBest />} />
+            <Route path='/' element={<Famous />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/signin' element={<Signin />} />
             <Route path='/ResetPassword' element={<ResetPassword />} />

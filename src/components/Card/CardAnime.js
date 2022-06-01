@@ -61,7 +61,7 @@ class CardAnime extends Component {
             <Card elevation={15} sx={{ bgcolor: '#212121' }}>
               <CardHeader
                 title={name}
-                sx={{ overflow: 'auto', pb: 0, height: 70, fontSize: 30, cursor: 'pointer' }}
+                sx={{ /* overflow: 'auto', */ pb: 0, height: 70, fontSize: 30, cursor: 'pointer' }}
                 onClick={() => this.redirectPage(id)}
               />
 
