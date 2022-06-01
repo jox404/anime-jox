@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/anime-jox/static/css/main.74eded5d.css",
-    "main.js": "/anime-jox/static/js/main.241db314.js",
+    "main.js": "/anime-jox/static/js/main.49fc6fff.js",
     "static/js/787.c6bbc79a.chunk.js": "/anime-jox/static/js/787.c6bbc79a.chunk.js",
     "static/media/kazetachinu050.jpg": "/anime-jox/static/media/kazetachinu050.3bb6c7afce768030a742.jpg",
     "static/media/logo-dark.png": "/anime-jox/static/media/logo-dark.2b52a300875d07c2cace.png",
     "index.html": "/anime-jox/index.html",
     "main.74eded5d.css.map": "/anime-jox/static/css/main.74eded5d.css.map",
-    "main.241db314.js.map": "/anime-jox/static/js/main.241db314.js.map",
+    "main.49fc6fff.js.map": "/anime-jox/static/js/main.49fc6fff.js.map",
     "787.c6bbc79a.chunk.js.map": "/anime-jox/static/js/787.c6bbc79a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.74eded5d.css",
-    "static/js/main.241db314.js"
+    "static/js/main.49fc6fff.js"
   ]
 }
