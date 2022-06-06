@@ -50,7 +50,7 @@ class TheBest extends Component {
   async getAnimesId() {
 
     const collectionGlobalRef = collection(db, "global")
-    const mostFavorites = query(collectionGlobalRef, orderBy("idUrl.metrics.favorit", "desc"), limit(20))
+    const mostFavorites = query(collectionGlobalRef, orderBy("idUrl.metrics.favorit", "desc"), limit(17))
 
     const querySnapshot = (await getDocs(mostFavorites)).docs
 

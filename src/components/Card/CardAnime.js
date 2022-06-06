@@ -66,14 +66,14 @@ class CardAnime extends Component {
               />
 
               <Box onMouseEnter={this.upBar} onMouseLeave={this.downBar}>
-                {this.state.show === true ? (
+                {/* {this.state.show === true ? (
                   <RatingBar
                     rating={this.state.rating}
                     funSaveRating={this.saveRating}
                   />
                 ) : (
                   ''
-                )}
+                )} */}
 
                 <CardMedia component={'img'} image={bgImage} height={300} onClick={() => this.redirectPage(id)} sx={{ cursor: 'pointer' }} />
               </Box>

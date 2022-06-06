@@ -28,35 +28,31 @@ class CustomizedSearch extends Component {
     this.state = {
       paginationAnimes: [],
       linksButton: [],
-      currentPage: 0,
+      currentPageNumber: 0,
       loadingAnimes: true,
-      animeFilters: [],
+      animeFiltersCategories: [],
+      animeFiltersGenres: [],
       selectedGenres: [],
       nextFilter: undefined,
       lastFilter: '',
       loadingGenres: true,
       showGender: false,
-      showCategory: false,
+      showCategory: true,
       showSeason: false,
     };
   }
-  async filterByCategori(filterBy, filters, limitPerPage, link) {
+  async filterBy(filterBy, filters, limitPerPage, link) {
     window.scrollTo(0, 0);
     const filterLink =
       link === undefined
         ? `https://kitsu.io/api/edge/anime?filter%5B${filterBy}%5D=${filters}&page%5Blimit%5D=${limitPerPage}&page%5Boffset%5D=0&sort=popularityRank`
-        /*   https://kitsu.io/api/edge/anime?filter%5Bgenres%5D=comedy&page%5Blimit%5D=8&page%5Boffset%5D=0 */
-
-        /* 'genres', 'comedy', 8, undefined */
         : link;
-    const currentPage =
+    const currentPageNumber =
       parseInt(
         filterLink.substring(filterLink.indexOf('&page%5Boffset%5D=') + 18)
-      ) /
-      limitPerPage +
-      1;
+      ) / limitPerPage + 1;
 
-    this.setState({ paginationAnimes: [], currentPage: currentPage });
+    this.setState({ paginationAnimes: [], currentPageNumber: currentPageNumber });
     await fetch(filterLink, { method: 'get' })
       .then((res) => {
         return res.json();
@@ -65,6 +61,7 @@ class CustomizedSearch extends Component {
         this.setState({
           paginationAnimes: this.state.paginationAnimes.concat(res.data),
         });
+        /* colocar em this só???? */
         this.setState({
           linksButton: res.links,
           loadingAnimes: false,
@@ -72,39 +69,54 @@ class CustomizedSearch extends Component {
       });
     this.setState({
       showGender: false,
-      showCategory: false,
+      showCategory: true,
       showSeason: false,
     })
   }
 
   async listFiltersAvailable(filter, getValue, sortBy) {
-    const firstLink = `https://kitsu.io/api/edge/${filter}?page%5Blimit%5D=10&page%5Boffset%5D=0&sort=${sortBy}`
+    var link = `https://kitsu.io/api/edge/${filter}?page%5Blimit%5D=10&page%5Boffset%5D=0&sort=${sortBy}`
     var data = []
+
+    for (var i = 1; i < 15; i = i * 2) {
+      if (i % 5 != 0);
+      /* console.log("teste" + i); */
+    }
     //the api provides a request with a limit of 10 filters(genres, category...)
-    for (var i = firstLink; i !== undefined; i = this.state.nextFilter) {
-      var link =
-        this.state.nextFilter === undefined
-          ? `https://kitsu.io/api/edge/${filter}?page%5Blimit%5D=10&page%5Boffset%5D=0&sort=${sortBy}`
-          : this.state.nextFilter;
+    while (link != undefined) {
       await fetch(link, { method: 'get' })
         .then((res) => {
           return res.json();
         })
         .then((res) => {
-          const filters = res.data.map((element) => {
-            const animeFilters = element.attributes[getValue];
-            data.push(animeFilters)
-          });
-          this.setState({
-            lastFilter: res.links.last,
-            nextFilter: res.links.next,
-          });
-        });
+          res.data.map((element) => {
+            const filter = element.attributes[getValue];
+            if (filter != 'ecchi' && filter != 'ahegao' && filter != 'yaoi' && filter != 'netorare') {
+              data.push(filter)
+            } else {
+              console.log('ecchi', filter)
+            }
+          },
+            link = res.links.next
+          )
+        })
     }
-    this.setState({
-      animeFilters: data,
-      loadingGenres: false,
-    });
+    if (filter == 'genres') {
+      console.log('genres')
+      /* this.setState({
+        animeFiltersGenres: data,
+        loadingGenres: false,
+      }); */
+    } else {
+      console.log('Categories')
+      this.setState({
+        animeFiltersCategories: data,
+      });
+    }
+    console.log('animeFiltersCategories', this.state.animeFiltersCategories, 'data', data)
+    console.log(filter == 'categories')
+    /* console.log('animeFiltersGenres', this.state.animeFiltersGenres) */
+
 
   }
   handleSeclectGenres(e) {
@@ -122,29 +134,29 @@ class CustomizedSearch extends Component {
     }
   }
 
-  handleShowFilter(e) {
-    const valueState = e.target.value
-    if (valueState === 'gender') {
-      this.state.showGender === false ? this.setState({ showGender: true }) :
+  handleShowFilter(filterBy) {
+    if (filterBy === 'gender') {
+      this.state.showFilter === false ? this.setState({ showGender: true }) :
         this.setState({ showGender: false })
-    } else if (valueState === 'category') {
+    } else if (filterBy === 'category') {
+      console.log('show category', this.state.animeFiltersCategories)
       this.state.showCategory === false ? this.setState({ showCategory: true }) :
-        this.setState({ showCategory: false })
-    } else if (valueState === 'season') {
+        this.setState({ showCategory: true })
+    } else if (filterBy === 'season') {
       this.state.showSeason === false ? this.setState({ showSeason: true }) :
         this.setState({ showSeason: false })
     }
   }
 
-  componentDidMount() {
-    this.filterByCategori('genres', 'comedy', 8, undefined);
+  async componentDidMount() {
+    this.filterBy('genres', 'comedy,crime', 8, undefined);
 
-    /* this.listFiltersAvailable('categories', 'slug', 'id') */
-    this.listFiltersAvailable('genres', 'name', 'name')
+    await this.listFiltersAvailable('genres', 'slug', 'id')
+    await this.listFiltersAvailable('categories', 'slug', 'id')
 
-    console.log(this.state.animeFilters)
   }
   render() {
+    console.log(this.state.animeFiltersCategories)
     return (
       <>
         <NavBar />
@@ -161,13 +173,13 @@ class CustomizedSearch extends Component {
           <Divider />
           <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
             <ButtonGroup>
-              <Button variant='contained' value='gender' onClick={(e) => this.handleShowFilter(e)}>Gender</Button>
-              <Button variant='contained' value='category' onClick={(e) => this.handleShowFilter(e)}>Category</Button>
-              <Button variant='contained' value='season' onClick={(e) => this.handleShowFilter(e)}>Season</Button>
+              <Button variant='contained' value='gender' onClick={(e) => this.handleShowFilter('gender')}>Gender</Button>
+              <Button variant='contained' value='category' onClick={(e) => this.handleShowFilter('category')}>Category</Button>
+              <Button variant='contained' value='season' onClick={(e) => this.handleShowFilter('season')}>Season</Button>
             </ButtonGroup>
           </Box>
 
-          <Box sx={{ minHeight: 470, display: `${this.state.showGender === true ? 'inline' : 'none'}` }}>
+          <Box sx={{ minHeight: 470, display: `${this.state.showFilter === true ? 'inline' : 'none'}` }}>
             <Box sx={{
               display: 'flex',
               flexDirection: 'row',
@@ -184,34 +196,62 @@ class CustomizedSearch extends Component {
             </Box>
             <FormGroup>
               <Grid container>
-                {this.state.animeFilters.map((category, index) => {
-                  return (
-                    <Grid
-                      item
-                      xs={6}
-                      sm={6}
-                      md={2}
-                      lg={2}
-                      xl={2}
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        paddingLeft: { xs: 2, sm: 6, lg: 0, xl: 0 },
-                      }}
-                      key={index}
-                    >
-                      <FormControlLabel
-                        key={index}
-                        control={<Checkbox value={category} onClick={(e) => this.handleSeclectGenres(e)} />}
-                        label={category}
-                      />
-                    </Grid>
-                  );
-                })}
+                {
+                  this.state.showCategory == true ?
+                    this.state.animeFiltersCategories.map((filter, index) => {
+                      return (
+                        <Grid
+                          item
+                          xs={6}
+                          sm={6}
+                          md={2}
+                          lg={2}
+                          xl={2}
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            paddingLeft: { xs: 2, sm: 6, lg: 0, xl: 0 },
+                          }}
+                          key={index}
+                        >
+                          <FormControlLabel
+                            key={index}
+                            control={<Checkbox value={filter} onClick={(e) => this.handleSeclectGenres(e)} />}
+                            label={filter}
+                          />
+                        </Grid>
+                      );
+                    }) :
+                    this.state.animeFiltersGenres.map((filter, index) => {
+                      return (
+                        <Grid
+                          item
+                          xs={6}
+                          sm={6}
+                          md={2}
+                          lg={2}
+                          xl={2}
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            paddingLeft: { xs: 2, sm: 6, lg: 0, xl: 0 },
+                          }}
+                          key={index}
+                        >
+                          <FormControlLabel
+                            key={index}
+                            control={<Checkbox value={filter} onClick={(e) => this.handleSeclectGenres(e)} />}
+                            label={filter}
+                          />
+                        </Grid>
+                      );
+                    })
+
+                }
 
               </Grid>
               <Box sx={{ display: `${this.state.loadingGenres === true ? 'none' : 'flex'}`, justifyContent: 'space-around' }}>
-                <Button variant={'contained'} onClick={() => this.filterByCategori('genres', this.state.selectedGenres, 8, undefined)}>Search</Button>
+                <Button variant={'contained'} onClick={() => this.filterBy(this.state.filterBy, this.state.selectedGenres, 8, undefined)}>Search</Button>
               </Box>
             </FormGroup>
           </Box>
@@ -273,7 +313,7 @@ class CustomizedSearch extends Component {
             <ButtonGroup>
               <Button
                 variant='contained'
-                disabled={this.state.currentPage === 1 ? true : false}
+                disabled={this.state.currentPageNumber === 1 ? true : false}
                 onClick={() =>
                   this.filterByCategori(
                     'categories',
@@ -303,7 +343,7 @@ class CustomizedSearch extends Component {
               </Button>
 
               <Button variant='contained' color='warning'>
-                {this.state.currentPage}
+                {this.state.currentPageNumber}
               </Button>
 
               <Button
