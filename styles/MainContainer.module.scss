@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100% !important;
+  background-color: rgb(8, 8, 8);
+}
+
+.containerPageRander {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

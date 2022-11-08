@@ -1,0 +1,60 @@
+.container {
+  width: 300px;
+  height: 100vh;
+  background-color: #101010;
+  user-select: none;
+  position: fixed;
+  z-index: 2;
+
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    z-index: 2;
+    height: 100vh;
+    padding: 10px 0px;
+    background-color: #101010;
+  }
+}
+.drawer {
+  width: 300px;
+  margin-left: 300px;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+  background-color: #161616;
+  display: none;
+}
+
+.showDrawer {
+  animation-name: showDrawerAnime;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  display: flex;
+}
+.hideDrawer {
+  display: flex;
+  animation-name: hideDrawerAnime;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes showDrawerAnime {
+  0% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 300px;
+  }
+}
+
+@keyframes hideDrawerAnime {
+  0% {
+    margin-left: 300px;
+    display: flex;
+  }
+  100% {
+    margin-left: 0px;
+    display: none;
+  }
+}

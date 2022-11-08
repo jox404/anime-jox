@@ -1,0 +1,86 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+
+  .posterAnime {
+    /* background-color: aqua; */
+    width: 70vw;
+    height: 70vh;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 25% 30% 43%;
+    grid-template-rows: 70% 30%;
+    gap: 1%;
+    z-index: 1;
+    padding: 15px;
+
+    .image {
+      width: 100%;
+      height: 100%;
+      grid-column: 1 / span 1;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+    }
+    .infos {
+      padding: 0px 5px;
+      width: 100%;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      display: flex;
+      flex-direction: column;
+      /*   background-color: #0008c1; */
+
+      h1 {
+        font-size: 30px;
+        font-weight: 400;
+      }
+      p {
+        font-size: 18px;
+        font-weight: 400;
+      }
+
+      /* :not(h1) {
+        margin: 15px 0px;
+      } */
+    }
+    .episodesList {
+      width: 100%;
+      height: 100%;
+      grid-column: 3 / span 1;
+      grid-row: 1 / span 2;
+      display: flex;
+      justify-content: left;
+    }
+    .descriptions {
+      width: 100%;
+      height: 100%;
+      grid-column: 1 / span 2;
+      text-align: justify;
+      overflow-y: auto;
+      padding: 5px 5px 5px 0px;
+    }
+  }
+}
+
+.container::before {
+  content: "";
+  background-size: cover;
+  position: absolute;
+  z-index: 1;
+  opacity: 0.3;
+  background-size: cover;
+  border-radius: 10px;
+  width: 70vw;
+  height: 70vh;
+  background-color: rgb(112, 10, 121);
+  /* padding: 25px 15px; */
+}
