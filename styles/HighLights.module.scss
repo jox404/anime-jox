@@ -13,8 +13,7 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  animation-name: appearVanish;
-  animation-duration: 60s;
+  display: none;
 
   .animeDescription {
     display: flex;
@@ -48,17 +47,39 @@
   }
 }
 
-@keyframes appearVanish {
+.apperAnimation {
+  display: flex;
+  animation-name: appear;
+  animation-duration: 5s;
+  z-index: 2;
+}
+.makeVisible {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+}
+
+.vanishAnimation {
+  animation-name: vanish;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes appear {
   0% {
     opacity: 0;
   }
-  2% {
+  100% {
     opacity: 1;
   }
-  99% {
+}
+
+@keyframes vanish {
+  0% {
     opacity: 1;
   }
   100% {
     opacity: 0;
+    display: none;
   }
 }

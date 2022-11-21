@@ -13,7 +13,7 @@ const AuthContext = createContext();
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  console.log(user);
+  /* console.log(user); */
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -24,6 +24,7 @@ const AuthContextProvider = ({ children }) => {
           displayName: user.displayName,
         });
       } else {
+        localStorage.clear();
         setUser(null);
       }
     });

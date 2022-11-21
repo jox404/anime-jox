@@ -1,7 +1,7 @@
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import { useContext } from "react";
-import styles from "../../../styles/UserDrawer.module.scss";
-import { AuthContext } from "../../contexts/AuthContext";
+import styles from "../../../../styles/UserDrawer.module.scss";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 export default function UserDrawer() {
   const { user, logout } = useContext(AuthContext);

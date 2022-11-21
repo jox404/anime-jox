@@ -24,12 +24,8 @@ import {
 import { IoSettingsSharp, IoSearchOutline, IoHomeSharp } from "react-icons/io5";
 import Link from "next/link";
 import { useContext, useEffect, useRef, useState } from "react";
-import {
-  AuthContext,
-  AuthContextProvider,
-  useAuth,
-} from "../../contexts/AuthContext";
-import UserDrawer from "./UserDrawer";
+import { AnimeListDrawer, UserDrawer } from "./Drawers";
+import { DocContext, AuthContext } from "../../contexts";
 /* import logo from "./assets/icons/logo.svg"; */
 
 const listColors = {
@@ -102,76 +98,105 @@ const mainOptions = [
     title: "Home",
     link: "",
     icon: <IoHomeSharp />,
-    selected: true,
   },
   {
     title: "Search",
     link: "",
     icon: <IoSearchOutline />,
-    selected: false,
   },
 ];
 const itens = [
-  {
+  /* {
     title: "My List",
+    name: "myList",
     link: "",
     icon: <BsStack />,
-    selected: false,
-  },
+  }, */
   {
     title: "Favorites",
+    name: "favorites",
     link: "",
     icon: <MdFavorite />,
-    selected: false,
   },
   {
     title: "Watching",
+    name: "watching",
     link: "",
     icon: <MdRemoveRedEye />,
-    selected: false,
   },
   {
     title: "See Later",
+    name: "seeLater",
     link: "",
     icon: <MdOutlineAccessTimeFilled />,
-    selected: false,
   },
   {
     title: "Dropped",
+    name: "dropped",
     link: "",
     icon: <BsTrash2Fill />,
-    selected: false,
   },
 ];
+const clickOutside = (ref, closeFunc, btnRef) => {
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        ref.current &&
+        !ref.current.contains(event.target) &&
+        !btnRef.current.contains(event.target)
+      ) {
+        if (!ref.current.classList.contains(styles.hideDrawer)) {
+          if (ref.current.classList.contains(styles.showDrawer)) {
+            closeFunc();
+          }
+        }
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+  }, [ref]);
+};
 
-const SideBar = (props) => {
+const SideBar = () => {
   const { user } = useContext(AuthContext);
-  const [drawer, setDrawer] = useState(<></>);
-  const drawerRef = useRef();
-  const drawerOfSidebar = (drawer) => {
+  const [currentDrawer, setCurrentDrawer] = useState(null);
+  const drawerRef = useRef(null);
+  const buttomsOpenRef = useRef(null);
+
+  const closeDrawer = () => {
+    const drawerContainer = drawerRef.current;
+    drawerContainer.classList.remove(styles.showDrawer);
+    drawerContainer.classList.add(styles.hideDrawer);
+    setCurrentDrawer(null);
+  };
+  const openDrawer = (drawerName) => {
     const drawerContainer = drawerRef.current;
     if (drawerContainer.classList.contains(styles.showDrawer)) {
-      drawerContainer.classList.remove(styles.showDrawer);
-      drawerContainer.classList.add(styles.hideDrawer);
+      if (drawerName == currentDrawer) {
+        closeDrawer();
+      } else {
+        closeDrawer();
+        setTimeout(() => {
+          drawerContainer.classList.remove(styles.hideDrawer);
+          drawerContainer.classList.add(styles.showDrawer);
+        }, 500);
+        clearTimeout();
+      }
     } else {
-      drawerContainer.classList.add(styles.showDrawer);
       drawerContainer.classList.remove(styles.hideDrawer);
+      drawerContainer.classList.add(styles.showDrawer);
     }
-    switch (drawer) {
-      case "user":
-        return setDrawer(<UserDrawer />);
-        break;
-    }
+    setCurrentDrawer(drawerName);
   };
 
-  useEffect(() => {
-    console.log(user, "AuthContextProvider");
-  }, []);
+  clickOutside(drawerRef, closeDrawer, buttomsOpenRef);
 
   return (
     <Box className={styles.container}>
-      <Box className={styles.drawer} ref={drawerRef}>
-        {drawer}
+      <Box
+        className={[styles.drawer /* , styles.showDrawer remover depois */]}
+        ref={drawerRef}
+      >
+        <AnimeListDrawer currentDrawer={currentDrawer} />
       </Box>
       <Box className={styles.menu}>
         <Box>
@@ -206,7 +231,7 @@ const SideBar = (props) => {
                 {mainOptions.map((item, index) => {
                   return (
                     <Link href={item.link} key={index}>
-                      <ListItem selected={item.selected}>
+                      <ListItem>
                         <ListItemIcon>{item.icon}</ListItemIcon>
                         <ListItemText primary={item.title} />
                       </ListItem>
@@ -216,9 +241,10 @@ const SideBar = (props) => {
               </ThemeProvider>
             </List>
           </Box>
-        </Box>
-        <Box className={styles.bottom}>
-          <Divider variant="middle" sx={{ borderColor: "#303030", mb: 2 }} />
+          <Divider
+            variant="middle"
+            sx={{ borderColor: "#303030", mb: 2, mt: 5 }}
+          />
           <Box
             sx={{
               /*  bgcolor: "#fff", */
@@ -234,6 +260,7 @@ const SideBar = (props) => {
                 padding: 0,
                 alignItems: "center",
               }}
+              ref={buttomsOpenRef}
             >
               <ThemeProvider theme={listCustomized}>
                 <Typography
@@ -249,20 +276,24 @@ const SideBar = (props) => {
                 >
                   Anime List
                 </Typography>
+
                 {itens.map((item, index) => {
                   return (
-                    <Link href={item.link} key={index}>
-                      <ListItem selected={item.selected}>
-                        <ListItemIcon>{item.icon}</ListItemIcon>
-                        <ListItemText primary={item.title} />
-                      </ListItem>
-                    </Link>
+                    <ListItem
+                      key={index}
+                      selected={currentDrawer === item.name}
+                      onClick={() => openDrawer(item.name)}
+                    >
+                      <ListItemIcon>{item.icon}</ListItemIcon>
+                      <ListItemText primary={item.title} />
+                    </ListItem>
                   );
                 })}
               </ThemeProvider>
             </List>
           </Box>
-
+        </Box>
+        <Box className={styles.bottom}>
           <List
             sx={{
               display: "flex",
@@ -305,7 +336,7 @@ const SideBar = (props) => {
                 <ListItem
                   selected={false}
                   sx={{ marginTop: 1 }}
-                  onClick={() => drawerOfSidebar("user")}
+                  onClick={() => drawerUpdateDrawer("user")}
                 >
                   <ListItemAvatar sx={{ minWidth: 0 }}>
                     <Avatar

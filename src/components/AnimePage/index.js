@@ -6,9 +6,8 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "../../../styles/AnimePage.module.scss";
-import getAnimeData from "../../connections/kitsuApi/getAnimeData";
 import { EpisodesList } from "../index";
 
 /* Icons */
@@ -17,13 +16,73 @@ import {
   MdOutlineAccessTimeFilled,
   MdRemoveRedEye,
 } from "react-icons/md";
+import { BsTrash2Fill } from "react-icons/bs";
+import { DocContext } from "../../contexts";
+import { async } from "@firebase/util";
 
 export default function AnimePage(props) {
-  const { animeData } = props;
+  const { animeData, id } = props;
+  const { updateAnimeList, userAnimeData } = useContext(DocContext);
+  const dataAnimeList = {
+    id: id,
+    title: animeData.title,
+    averageRating: animeData.averageRating,
+    posterImage: animeData.posterImage,
+  };
+  const [listStatuses, setListStatuses] = useState({
+    favorites: false,
+    seeLater: false,
+    watching: false,
+    dropped: false,
+  });
+  const movie = animeData.episodesList.length > 1 ? false : true;
+
+  const InitialStatuses = async () => {
+    var list = listStatuses;
+    if (userAnimeData !== null) {
+      const statuses = Object.keys(userAnimeData).map((key) => {
+        return [key, userAnimeData[key]];
+      });
+      if (statuses[1] !== null) {
+        statuses.map((status) => {
+          const statusArray = status[1];
+          if (statusArray !== null) {
+            statusArray.map((value) => {
+              const statusValue = value.mapValue.fields;
+              if (statusValue.id.stringValue == id) {
+                return (list[status[0]] = true);
+              } else {
+                return (list[status[0]] = false);
+              }
+            });
+          }
+        });
+      }
+    }
+    setListStatuses({
+      favorites: list.favorites,
+      seeLater: list.seeLater,
+      watching: list.watching,
+      dropped: list.dropped,
+    });
+  };
+  const handleUpdateStatuses = (name) => {
+    if (listStatuses[name]) {
+      setListStatuses((prevState) => ({
+        ...prevState,
+        [name]: false,
+      }));
+    } else {
+      setListStatuses((prevState) => ({
+        ...prevState,
+        [name]: true,
+      }));
+    }
+  };
 
   useEffect(() => {
-    /* console.log(animeData); */
-  }, [animeData]);
+    InitialStatuses();
+  }, []);
   return (
     <>
       <Box
@@ -60,35 +119,98 @@ export default function AnimePage(props) {
               value={4.5}
               precision={0.5}
               readOnly
-              sx={{ mb: 5 }}
+              sx={{ mb: 3 }}
             />
-            <Box>
+            <Box sx={{ mb: 3 }}>
               <IconButton
                 sx={{
-                  bgcolor: "#32323234",
-                  ":hover": { bgcolor: "#6060609d" },
+                  ":hover": { bgcolor: "#ff555525" },
+                }}
+                onClick={async () => {
+                  updateAnimeList(
+                    listStatuses.favorites,
+                    dataAnimeList,
+                    "favorites"
+                  );
+                  handleUpdateStatuses("favorites");
                 }}
               >
-                <MdFavorite color="#FF9F9F" />
+                <MdFavorite
+                  color={listStatuses.favorites !== true ? "#fff" : "#ff5555"}
+                />
               </IconButton>
-              <IconButton>
-                <MdRemoveRedEye color="#E14D2A" />
+              <IconButton
+                sx={{
+                  ":hover": { bgcolor: "#f1fa8c25" },
+                }}
+                onClick={async (event) => {
+                  await updateAnimeList(
+                    listStatuses.seeLater,
+                    dataAnimeList,
+                    "seeLater"
+                  );
+                  handleUpdateStatuses("seeLater");
+                }}
+              >
+                <MdOutlineAccessTimeFilled
+                  color={listStatuses.seeLater !== true ? "#fff" : "#f1fa8c"}
+                />
               </IconButton>
-              <IconButton>
-                <MdFavorite color="#fff" />
+              <IconButton
+                sx={{
+                  ":hover": { bgcolor: "#bd93f925" },
+                }}
+                onClick={async () => {
+                  await updateAnimeList(
+                    listStatuses.watching,
+                    dataAnimeList,
+                    "watching"
+                  );
+                  handleUpdateStatuses("watching");
+                }}
+              >
+                <MdRemoveRedEye
+                  color={listStatuses.watching != true ? "#fff" : "#bd93f9"}
+                />
               </IconButton>
-              <IconButton>
-                <MdOutlineAccessTimeFilled color="#E14D2A" />
-              </IconButton>
-              <IconButton>
-                <MdFavorite color="#fff" />
+              <IconButton
+                sx={{
+                  ":hover": { bgcolor: "#ffb86c25" },
+                }}
+                onClick={async () => {
+                  updateAnimeList(
+                    listStatuses.dropped,
+                    dataAnimeList,
+                    "dropped"
+                  );
+                  handleUpdateStatuses("dropped");
+                }}
+              >
+                <BsTrash2Fill
+                  color={listStatuses.dropped !== true ? "#fff" : "#ffb86c"}
+                />
               </IconButton>
             </Box>
           </Box>
           <Box className={styles.episodesList}>
-            <EpisodesList episodesList={animeData.episodesList} />
+            <Typography component={"h2"}>Episodes</Typography>
+            <Box className={styles.containerEpisodes}>
+              {animeData.episodesList.map((episode, index) => {
+                return (
+                  <EpisodesList
+                    episode={episode}
+                    animeData={{
+                      thumbnail: animeData.posterImage,
+                      title: animeData.title,
+                    }}
+                    movie={movie}
+                    key={`episode${index}`}
+                  />
+                );
+              })}
+            </Box>
           </Box>
-          <Box className={styles.descriptions}>
+          <Box className={styles.description}>
             <Typography variant="body1">{animeData.synopsis}</Typography>
           </Box>
         </Box>

@@ -13,7 +13,6 @@ export default async function getCustomSearch(
     urlBase = urlBase + `filter[categories]=${categories.toString()}&`;
   }
   if (genres) {
-    console.log(genres, "genres");
     urlBase = urlBase + `filter[genres]=${genres.toString()}&`;
   }
   if (season) {
@@ -27,13 +26,11 @@ export default async function getCustomSearch(
   } else if (seasonYearTo) {
     urlBase = urlBase + `filter[seasonYear]=..${seasonYearTo}&`;
   }
-  console.log(urlBase, "urlBase");
 
   var data = [];
   await axios.get(urlBase).then((res) => {
     try {
       res.data.data.map(async (anime) => {
-        console.log(anime, "dataAnime");
         const dataAnime = {
           posterImage: await handleDontExists(
             "text",
@@ -43,7 +40,7 @@ export default async function getCustomSearch(
           id: anime.id,
           /* averageRating: anime.attributes.averageRating, */
         };
-        console.log(dataAnime, "dataAnime");
+
         data.push(dataAnime);
       });
     } catch (error) {

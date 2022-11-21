@@ -17,13 +17,14 @@
   }
 }
 .drawer {
-  width: 300px;
+  width: 400px;
   margin-left: 300px;
   height: 100vh;
   position: absolute;
   z-index: -1;
   background-color: #161616;
   display: none;
+  flex-direction: column;
 }
 
 .showDrawer {
@@ -41,7 +42,7 @@
 
 @keyframes showDrawerAnime {
   0% {
-    margin-left: 0px;
+    margin-left: -100px;
   }
   100% {
     margin-left: 300px;
@@ -54,7 +55,7 @@
     display: flex;
   }
   100% {
-    margin-left: 0px;
+    margin-left: -100px;
     display: none;
   }
 }

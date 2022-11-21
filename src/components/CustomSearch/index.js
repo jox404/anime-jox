@@ -42,7 +42,7 @@ export default function CustomSearch(props) {
       yearToFilter
     );
     setDataAnime(data);
-    console.log(dataAnime, "dataAnime");
+    /* console.log(dataAnime, "dataAnime"); */
   };
 
   useEffect(() => {

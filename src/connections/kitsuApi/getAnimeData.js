@@ -35,7 +35,7 @@ export default async function getAnimeData(id) {
         "large",
         "tiny",
       ]),
-      averageRating: data.attributes.averageRating,
+      averageRating: parseFloat(data.attributes.averageRating) / 10 / 2,
       episodesLink: data.relationships.episodes.links.related,
       episodesList: [],
       genresLink: data.relationships.genres.links.related,
@@ -47,9 +47,28 @@ export default async function getAnimeData(id) {
     await axios
       .get(`${link}?fields[episodes]=titles,synopsis,thumbnail`)
       .then(async (response) => {
-        dataAnime.episodesList = dataAnime.episodesList.concat(
-          response.data.data
-        );
+        const episodes = response.data.data;
+        episodes.forEach(async (episode) => {
+          console.log(episode, "episode");
+          const episodeData = {
+            title: await handleDontExists("text", episode.attributes.titles, [
+              "en",
+              "en_us",
+              "en_jp",
+              "ja_jp",
+            ]),
+            synopsis: await handleDontExists("text", episode.attributes, [
+              "synopsis",
+              "description",
+            ]),
+            thumbnail: await handleDontExists(
+              "text",
+              episode.attributes.thumbnail,
+              ["original", "medium", "small", "large", "tiny"]
+            ),
+          };
+          dataAnime.episodesList.push(episodeData);
+        });
         if (response.data.links.hasOwnProperty("next")) {
           await getEpisodesList(response.data.links.next);
         } else {
@@ -57,6 +76,7 @@ export default async function getAnimeData(id) {
         }
       });
   };
+
   const getGenresList = async (link) => {
     await axios
       .get(`${link}?fields[genres]=name,slug`)
