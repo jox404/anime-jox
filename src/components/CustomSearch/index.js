@@ -1,13 +1,14 @@
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Grid, IconButton, Typography } from "@mui/material";
 
 import { Box } from "@mui/system";
-import { React, Component, useEffect, useState } from "react";
+import { React, Component, useEffect, useState, useRef } from "react";
 
 import { CardAnime } from "../index";
 
 //ICONS
 import CircularProgress from "@mui/material/CircularProgress";
 import { AiFillDownCircle } from "react-icons/ai";
+import { BsArrowRightShort, BsArrowLeftShort } from "react-icons/bs";
 
 //CSS
 import styles from "../../../styles/CustomSearch.module.scss";
@@ -32,21 +33,47 @@ export default function CustomSearch(props) {
   ]);
   const [yearFromFilter, setYearFromFilter] = useState("2010");
   const [yearToFilter, setYearToFilter] = useState("2018");
+  const [links, setLinks] = useState(null);
+  const cardsContainerRef = useRef(null);
 
-  const makeSearch = async () => {
-    const data = await getCustomSearch(
+  const cardAnimation = (side, func) => {
+    if (cardsContainerRef.current) {
+      const cards = cardsContainerRef.current.classList;
+      if (side === "right") {
+        func;
+        cards.add(styles.animeSlideRight);
+        setTimeout(() => {
+          cards.remove(styles.animeSlideRight);
+        }, 2000);
+        clearTimeout();
+      } else {
+        func;
+        cards.add(styles.animeSlideLeft);
+        setTimeout(() => {
+          cards.remove(styles.animeSlideLeft);
+        }, 2000);
+        clearTimeout();
+      }
+    }
+  };
+
+  const makeSearch = async (link, ...filters) => {
+    if (!link !== null) {
+      const data = await getCustomSearch(link, ...filters);
+      setDataAnime(data.data);
+      setLinks(data.links);
+    }
+  };
+
+  useEffect(() => {
+    makeSearch(
+      false,
       categoryFilter,
       genreFilter,
       seasonFilter,
       yearFromFilter,
       yearToFilter
     );
-    setDataAnime(data);
-    /* console.log(dataAnime, "dataAnime"); */
-  };
-
-  useEffect(() => {
-    makeSearch();
   }, []);
 
   return (
@@ -130,6 +157,7 @@ export default function CustomSearch(props) {
             container
             spacing={2}
             style={{ display: "flex", justifyContent: "left" }}
+            ref={cardsContainerRef}
           >
             {dataAnime.map((anime, index) => {
               return (
@@ -162,6 +190,51 @@ export default function CustomSearch(props) {
             No anime found...
           </Typography>
         )}
+      </Box>
+      <Box sx={{ display: "flex", justifyContent: "space-between", mt: 1 }}>
+        <Box>
+          <Button
+            onClick={() => {
+              if (links.prev !== null) {
+                cardAnimation("left", makeSearch(links.prev));
+              }
+            }}
+            startIcon={<BsArrowLeftShort />}
+          >
+            Prev
+          </Button>
+          <Button
+            onClick={() => {
+              if (links.first !== null) {
+                cardAnimation("left", makeSearch(links.first));
+              }
+            }}
+          >
+            First
+          </Button>
+        </Box>
+        <Box>
+          <Button
+            onClick={() => {
+              if (links.last !== null) {
+                cardAnimation("right", makeSearch(links.last));
+              }
+            }}
+          >
+            Last
+          </Button>
+
+          <Button
+            onClick={() => {
+              if (links.next !== null) {
+                cardAnimation("right", makeSearch(links.next));
+              }
+            }}
+            endIcon={<BsArrowRightShort />}
+          >
+            Next
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

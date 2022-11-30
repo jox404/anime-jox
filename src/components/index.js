@@ -8,6 +8,7 @@ import CardAnime from "./Card";
 import Footer from "./Footer/index.js";
 import Signin from "./SignIn/Signin";
 import Signup from "./Signup";
+import Search from "./Search";
 
 export {
   SideBar,
@@ -20,4 +21,5 @@ export {
   Footer,
   Signin,
   Signup,
+  Search,
 };

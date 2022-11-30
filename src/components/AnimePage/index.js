@@ -49,16 +49,15 @@ export default function AnimePage(props) {
           if (statusArray !== null) {
             statusArray.map((value) => {
               const statusValue = value.mapValue.fields;
-              if (statusValue.id.stringValue == id) {
-                return (list[status[0]] = true);
-              } else {
-                return (list[status[0]] = false);
+              if (statusValue.id.stringValue === id) {
+                list = { ...list, [status[0]]: true };
               }
             });
           }
         });
       }
     }
+    console.log(list.watching, "list");
     setListStatuses({
       favorites: list.favorites,
       seeLater: list.seeLater,

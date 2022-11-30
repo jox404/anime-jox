@@ -45,3 +45,48 @@
     outline-style: none;
   }
 }
+.animeSlideRight {
+  animation-name: slideRight;
+  animation-duration: 2s;
+}
+.animeSlideLeft {
+  animation-name: slideLeft;
+  animation-duration: 2s;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(0vw);
+  }
+  50% {
+    transform: translateX(100vw);
+  }
+  51% {
+    opacity: 0;
+  }
+  52% {
+    transform: translateX(-100vw);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0vw);
+  }
+}
+@keyframes slideRight {
+  0% {
+    transform: translateX(0vw);
+  }
+  50% {
+    transform: translateX(-100vw);
+  }
+  51% {
+    opacity: 0;
+  }
+  52% {
+    transform: translateX(100vw);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0vw);
+  }
+}

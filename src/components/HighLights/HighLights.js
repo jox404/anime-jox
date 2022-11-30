@@ -10,11 +10,9 @@ export default function HighLights(props) {
     next: 1,
   });
   const { animeList } = props;
-  const [count, setCount] = useState(0);
   const animesRef = useRef(null);
 
   const addAnime = (ref, current, next, limit) => {
-    console.log(current, next);
     if (ref) {
       const animes = ref.current.getElementsByClassName(styles.animePoster);
       animes[current].classList.add(styles.makeVisible);
@@ -51,7 +49,7 @@ export default function HighLights(props) {
 
   return (
     <Box className={styles.container} ref={animesRef}>
-      {props.animeList.map((anime, index) => {
+      {animeList.map((anime, index) => {
         let rating = parseFloat(anime.averageRating) / 10 / 2;
         return (
           <Box

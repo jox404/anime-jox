@@ -6,7 +6,7 @@ import getMostPopular from "../src/connections/kitsuApi/getMostPopular";
 import styles from "../styles/Home.module.scss";
 
 export async function getStaticProps() {
-  const popular = await getMostPopular(12);
+  const popular = await getMostPopular(8);
   const categories = await getFilters("categories");
   const genres = await getFilters("genres");
 

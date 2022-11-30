@@ -10,11 +10,9 @@ import { CardAnime } from "../index";
 /* import Footer from "../Footer/Footer"; */
 
 export default function Popular(props) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [paginationAnimes, setPaginationAnimes] = useState([]);
   const [loadingAnimes, setLoadingAnimes] = useState([]);
 
-  const paginationItems = props.animeList;
+  const { animeList } = props;
 
   return (
     <>
@@ -26,7 +24,7 @@ export default function Popular(props) {
           <Grid
             container
             style={{ display: "flex", justifyContent: "left" }}
-            spacing={{ xs: 1, sm: 2, md: 2, lg: 8, xl: 2 }}
+            spacing={2}
           >
             <CircularProgress
               sx={{
@@ -34,23 +32,32 @@ export default function Popular(props) {
                 marginTop: 25,
               }}
             />
-            {paginationItems.map((anime, index) => {
+            {animeList.map((anime, index) => {
               return (
                 <Grid
                   item
                   key={index}
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={3}
-                  xl={2}
-                  style={{ display: "flex", justifyContent: "center" }}
+                  xs={index === 0 || index === 1 ? 6 : 6}
+                  sm={index === 0 || index === 1 ? 6 : 4}
+                  md={index === 0 || index === 1 ? 6 : 3}
+                  lg={index === 0 || index === 1 ? 6 : 2}
+                  xl={index === 0 || index === 1 ? 6 : 2}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    width: 0,
+                    flexBasis: 0,
+                  }}
                 >
                   <CardAnime
                     key={index}
-                    bgImage={anime.posterImage}
+                    bgImage={
+                      index === 0 || index === 1
+                        ? anime.coverImage
+                        : anime.posterImage
+                    }
                     id={anime.id}
-                    size={"small"}
+                    size={index === 0 || index === 1 ? "large" : "medium"}
                   />
                 </Grid>
               );

@@ -2,7 +2,7 @@ export default async function handleDontExists(type, obj, values) {
   let data = "???";
 
   if (typeof obj !== "undefined") {
-    if (type === "text") {
+    if (type === "text" || type === "link") {
       if (obj === null) {
         return (data = "???");
       } else {
@@ -13,7 +13,14 @@ export default async function handleDontExists(type, obj, values) {
         if (prop) {
           data = obj[prop];
         } else {
-          data = "???";
+          switch (type) {
+            case "text":
+              data = "???";
+              break;
+            case "link":
+              data = null;
+              break;
+          }
         }
       }
     } else if (type === "thumbnail") {
@@ -27,7 +34,14 @@ export default async function handleDontExists(type, obj, values) {
 
         if (prop) {
           if (obj[prop] === null) {
-            data = "???";
+            switch (obj[prop]) {
+              case "text":
+                data = "???";
+                break;
+              case "link":
+                data = null;
+                break;
+            }
           } else {
             data = obj[prop];
           }

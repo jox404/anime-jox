@@ -1,0 +1,22 @@
+.container {
+  width: 80vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.781);
+
+  justify-content: center;
+  align-items: flex-start;
+  .search {
+    margin-top: 10%;
+    padding: 0px 10px;
+    width: 400px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    .icon {
+      color: #202020;
+    }
+  }
+}

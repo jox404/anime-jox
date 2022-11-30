@@ -1,25 +1,33 @@
-import { CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
-import React, { Component } from "react";
-import { Card, Box } from "@mui/material";
+import React, { useEffect, useRef } from "react";
+import { Box } from "@mui/material";
+import styles from "../../../styles/Card.module.scss";
 
 export default function CardAnime(props) {
   const { bgImage, id, size } = props;
+  var height;
+  switch (size) {
+    case "small":
+      height = 200;
+      break;
+    case "medium":
+      height = 250;
+      break;
+    case "large":
+      height = 400;
+      break;
+    default:
+      height = 300;
+      break;
+  }
 
   return (
     <Box
-      elevation={15}
-      sx={{ bgcolor: "#212121" }}
-      style={{
-        width: "100%",
-        height: size === "small" ? 200 : 320,
+      className={styles.container}
+      sx={{
+        bgcolor: "#212121",
+        height: height,
         display: "flex",
         backgroundImage: `url( ${bgImage} )`,
-        position: "relative",
-        borderRadius: 20,
-        margin: "0px 0px",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        cursor: "pointer",
       }}
       component={"a"}
       href={`/animes/${id}`}

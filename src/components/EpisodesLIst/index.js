@@ -12,11 +12,9 @@ export default function EpisodesList(props) {
   if (movie) {
     data = animeData;
   }
-  console.log(data);
-
   return (
     <Box className={styles.episode}>
-      <Box>
+      <Box className={styles.containerThumbnail}>
         <img src={data.thumbnail || "???"} />
       </Box>
       <Box className={styles.txt}>

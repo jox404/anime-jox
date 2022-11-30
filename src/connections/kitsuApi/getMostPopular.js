@@ -17,7 +17,7 @@ export default async function getMostPopular(amount) {
             posterImage: await handleDontExists(
               "text",
               anime.attributes.posterImage,
-              ["original", "medium", "small", "large", "tiny"]
+              ["medium", "original", "small", "large", "tiny"]
             ),
             title: await handleDontExists("text", anime.attributes.titles, [
               "en",

@@ -1,16 +1,18 @@
 import SideBar from "../SideBar";
 import styles from "../../../styles/MainContainer.module.scss";
-import { Footer } from "../index";
+import { Footer, Search } from "../index";
 import { useRouter } from "next/router";
 import { Box } from "@mui/material";
+import { useState } from "react";
 
 export default function MainContainer({ children }, props) {
   const router = useRouter();
   const renderSideBar = router.pathname.startsWith("/auth");
+  const [visibleSearch, setVisibleSearch] = useState(false);
 
   return (
     <Box className={styles.container}>
-      {renderSideBar ? <></> : <SideBar />}
+      {renderSideBar ? <></> : <SideBar setVisibleSearch={setVisibleSearch} />}
       <Box
         className={styles.containerPageRander}
         sx={
@@ -22,6 +24,7 @@ export default function MainContainer({ children }, props) {
               }
         }
       >
+        <Search visible={visibleSearch} setVisibleSearch={setVisibleSearch} />
         {children}
       </Box>
     </Box>

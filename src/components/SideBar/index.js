@@ -26,7 +26,8 @@ import Link from "next/link";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AnimeListDrawer, UserDrawer } from "./Drawers";
 import { DocContext, AuthContext } from "../../contexts";
-/* import logo from "./assets/icons/logo.svg"; */
+import logo from "../../../public/assets/icons/logo.svg";
+import Image from "next/image";
 
 const listColors = {
   light: "#f8f8f2",
@@ -93,19 +94,8 @@ const listCustomized = createTheme({
     },
   },
 });
-const mainOptions = [
-  {
-    title: "Home",
-    link: "",
-    icon: <IoHomeSharp />,
-  },
-  {
-    title: "Search",
-    link: "",
-    icon: <IoSearchOutline />,
-  },
-];
-const itens = [
+
+const animeList = [
   /* {
     title: "My List",
     name: "myList",
@@ -137,7 +127,35 @@ const itens = [
     icon: <BsTrash2Fill />,
   },
 ];
-const clickOutside = (ref, closeFunc, btnRef) => {
+
+const yourList = [
+  {
+    title: "Doramas",
+    name: "doramas",
+    link: "",
+    icon: <BsStack />,
+  },
+  {
+    title: "Shounen",
+    name: "shounen",
+    link: "",
+    icon: <BsStack />,
+  },
+  {
+    title: "Nostalgia",
+    name: "nostalgia",
+    link: "",
+    icon: <BsStack />,
+  },
+  {
+    title: "90's Animes",
+    name: "90's animes",
+    link: "",
+    icon: <BsStack />,
+  },
+];
+
+const ClickOutside = (ref, closeFunc, btnRef) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -156,11 +174,13 @@ const clickOutside = (ref, closeFunc, btnRef) => {
   }, [ref]);
 };
 
-const SideBar = () => {
+const SideBar = (props) => {
   const { user } = useContext(AuthContext);
   const [currentDrawer, setCurrentDrawer] = useState(null);
   const drawerRef = useRef(null);
   const buttomsOpenRef = useRef(null);
+
+  const { setVisibleSearch } = props;
 
   const closeDrawer = () => {
     const drawerContainer = drawerRef.current;
@@ -188,29 +208,19 @@ const SideBar = () => {
     setCurrentDrawer(drawerName);
   };
 
-  clickOutside(drawerRef, closeDrawer, buttomsOpenRef);
+  ClickOutside(drawerRef, closeDrawer, buttomsOpenRef);
 
   return (
     <Box className={styles.container}>
-      <Box
-        className={[styles.drawer /* , styles.showDrawer remover depois */]}
-        ref={drawerRef}
-      >
+      <Box className={[styles.drawer]} ref={drawerRef}>
         <AnimeListDrawer currentDrawer={currentDrawer} />
       </Box>
       <Box className={styles.menu}>
-        <Box>
-          <Box
-            style={{
-              justifyContent: "center",
-              display: "flex",
-              alignItems: "center",
-              height: 50,
-            }}
-          >
-            <Link href={"../../"}>
-              <LogoDev />
-            </Link>
+        <Box className={styles.top}>
+          <Box className={styles.logo}>
+            <Box href={"../../"} component={"a"}>
+              <Image src={logo} width={80} height={80} />
+            </Box>
           </Box>
           <Box
             sx={{
@@ -219,49 +229,34 @@ const SideBar = () => {
               flexDirection: "column",
             }}
           >
-            <List
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                padding: 0,
-                alignItems: "center",
-              }}
-            >
+            <List className={styles.list}>
               <ThemeProvider theme={listCustomized}>
-                {mainOptions.map((item, index) => {
-                  return (
-                    <Link href={item.link} key={index}>
-                      <ListItem>
-                        <ListItemIcon>{item.icon}</ListItemIcon>
-                        <ListItemText primary={item.title} />
-                      </ListItem>
-                    </Link>
-                  );
-                })}
+                <Link href={"#"}>
+                  <ListItem>
+                    <ListItemIcon>
+                      <IoHomeSharp />
+                    </ListItemIcon>
+                    <ListItemText primary={"Home"} />
+                  </ListItem>
+                </Link>
+                <ListItem onClick={() => setVisibleSearch(true)}>
+                  <ListItemIcon>
+                    <IoSearchOutline />
+                  </ListItemIcon>
+                  <ListItemText primary={"Search"} />
+                </ListItem>
               </ThemeProvider>
             </List>
           </Box>
-          <Divider
-            variant="middle"
-            sx={{ borderColor: "#303030", mb: 2, mt: 5 }}
-          />
+
           <Box
             sx={{
-              /*  bgcolor: "#fff", */
               display: "flex",
               justifyContent: "space-between",
               flexDirection: "column",
             }}
           >
-            <List
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                padding: 0,
-                alignItems: "center",
-              }}
-              ref={buttomsOpenRef}
-            >
+            <List className={styles.list} ref={buttomsOpenRef}>
               <ThemeProvider theme={listCustomized}>
                 <Typography
                   variant="h2"
@@ -277,7 +272,7 @@ const SideBar = () => {
                   Anime List
                 </Typography>
 
-                {itens.map((item, index) => {
+                {animeList.map((item, index) => {
                   return (
                     <ListItem
                       key={index}
@@ -292,6 +287,49 @@ const SideBar = () => {
               </ThemeProvider>
             </List>
           </Box>
+          {/* lista dois teste */}
+          {/* <Box
+            sx={{
+              bgcolor: "#fff",
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: "column",
+            }}
+          >
+            <List
+              className={[styles.list, styles.yourList]}
+              ref={buttomsOpenRef}
+            >
+              <ThemeProvider theme={listCustomized}>
+                <Typography
+                  variant="h2"
+                  sx={{
+                    pl: "25px",
+                    mb: 1,
+                    width: "100%",
+                    textAlign: "left",
+                    fontSize: 19,
+                    color: "#909090",
+                  }}
+                >
+                  #Your Lists
+                </Typography>
+
+                {yourList.map((item, index) => {
+                  return (
+                    <ListItem
+                      key={index}
+                      selected={currentDrawer === item.name}
+                      onClick={() => openDrawer(item.name)}
+                    >
+                      <ListItemIcon>{item.icon}</ListItemIcon>
+                      <ListItemText primary={item.title} />
+                    </ListItem>
+                  );
+                })}
+              </ThemeProvider>
+            </List>
+          </Box> */}
         </Box>
         <Box className={styles.bottom}>
           <List

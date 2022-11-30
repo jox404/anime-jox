@@ -1,3 +1,25 @@
+# SOBRE O PROJETO
+
+É uma wiki de animes, nela você pode procurar informações sobre animes.
+As buscas podem ser feitas por filtros ou pelo nome do anime(busca por nome ainda não implementada).
+Ao fazer login, você pode atribuir um status a esse anime.
+Também é possível criar listas personalizadas(ainda não implementado).
+Essa é a segunda versão desse projeto, quando fiz a primeira ainda não tinha experiência com React, então ela ficou um pouco "ruim", mas gostei tanto do projeto que decidi reformular.
+
+# ONDE ACESSAR O PROJETO
+
+Você pode acessar https://jox404.github.io/anime-jox/.
+
+# QUERO IMPLEMENTAR LOCALMENTE
+
+1-Baixar o projeto.
+2-Rodar um npm install.
+3-Criar um projeto/web no firebase(permitir leitura/escrita e abilitar login por email e senha).
+4-Passar as configurações do projeto para o arquivo "firebaseConfig.env".
+5-rodar npm run dev.
+
+# NOTAS DO NEXT.JS
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

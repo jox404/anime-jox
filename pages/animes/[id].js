@@ -3,29 +3,48 @@ import { useEffect, useState } from "react";
 import { AnimePage } from "../../src/components/index";
 import getAnimeData from "../../src/connections/kitsuApi/getAnimeData";
 
-export default function Anime() {
+export async function getStaticPaths() {
+  return {
+    paths: [
+      {
+        params: {
+          id: "1",
+        },
+      },
+      {
+        params: {
+          id: "2",
+        },
+      },
+      {
+        params: {
+          id: "3",
+        },
+      },
+    ],
+    fallback: true,
+  };
+}
+
+export async function getStaticProps(context) {
+  const id = context.params.id;
+  const data = await getAnimeData(id);
+  return {
+    props: {
+      data: data,
+    },
+  };
+}
+
+export default function Anime(props) {
   const router = useRouter();
-  const [animeData, setDataAnime] = useState();
-
   const { id } = router.query;
-
-  useEffect(() => {
-    if (!id) {
-      return;
-    } else {
-      const fetchAnimeById = async () => {
-        const response = await getAnimeData(id);
-        setDataAnime(response);
-      };
-      fetchAnimeById();
-    }
-  }, [id]);
   return (
     <>
-      {animeData === undefined ? (
+      {props.data === undefined ? (
         <></>
       ) : (
-        <AnimePage id={id} animeData={animeData} />
+        <AnimePage id={id} animeData={props.data} />
       )}
     </>
   );

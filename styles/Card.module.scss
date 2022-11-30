@@ -1,29 +1,10 @@
-.formControlLabel {
-  margin-left: 2px;
-  margin-right: 2px;
+.container {
+  width: 100%;
+  display: flex;
+  position: relative;
+  border-radius: 20px;
+  margin: 0px 0px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
-
-.bgRatingBar {
-  background: #3232329d;
-}
-
-// ::-webkit-scrollbar {
-//   width: 7px;
-//   margin-right: 10px;
-// }
-
-// /* Track */
-// ::-webkit-scrollbar-track {
-//   border-radius: 10px;
-// }
-
-// /* Handle */
-// ::-webkit-scrollbar-thumb {
-//   background: rgb(232, 58, 20);
-//   border-radius: 10px;
-// }
-
-// /* Handle on hover */
-// ::-webkit-scrollbar-thumb:hover {
-//   background: #f9f9f9;
-// }

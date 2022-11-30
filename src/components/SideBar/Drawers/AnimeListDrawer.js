@@ -94,7 +94,7 @@ export default function AnimeListDrawer(props) {
                     <Typography>{limitCharacters(data.title, 20)}</Typography>
                     <Rating
                       name="animeRating"
-                      value={parseFloat(data.averageRating)}
+                      value={data.averageRating}
                       precision={0.5}
                       readOnly
                     />

@@ -5,7 +5,6 @@
   user-select: none;
   position: fixed;
   z-index: 2;
-
   .menu {
     display: flex;
     justify-content: space-between;
@@ -14,6 +13,34 @@
     height: 100vh;
     padding: 10px 0px;
     background-color: #101010;
+    .top {
+      height: 100%;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      .logo {
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        padding: 0px;
+        margin: 20px 0px;
+        a {
+          display: flex;
+          align-items: center;
+        }
+      }
+      .list {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        align-items: center;
+        margin: 15px 0px;
+      }
+      .yourList {
+        overflow-x: scroll;
+        background-color: aqua;
+      }
+    }
   }
 }
 .drawer {
