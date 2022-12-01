@@ -4,11 +4,14 @@
   position: absolute;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.781);
-
   justify-content: center;
   align-items: flex-start;
+  > :first-child {
+    max-height: 100vh;
+  }
   .search {
-    margin-top: 10%;
+    margin-top: 100px;
+    height: 45px;
     padding: 0px 10px;
     width: 400px;
     background-color: #fff;
@@ -19,4 +22,46 @@
       color: #202020;
     }
   }
+
+  .animesList {
+    max-height: calc(100% - 145px);
+    overflow-y: scroll;
+    ul,
+    li {
+      padding: 0px;
+    }
+  }
+
+  .cardAnime {
+    margin: 10px 0px;
+    padding: 5px;
+    width: 400px;
+    height: 100px;
+    background-color: #101010;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    img {
+      border-radius: 10px;
+      width: 150px;
+      height: 100%;
+      object-fit: cover;
+    }
+    > :last-child {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
+}
+
+.alert {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-self: center;
 }

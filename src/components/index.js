@@ -4,7 +4,7 @@ import Popular from "./Popular";
 import CustomSearch from "./CustomSearch";
 import AnimePage from "./AnimePage/index";
 import EpisodesList from "./EpisodesLIst";
-import CardAnime from "./Card";
+import CardAnime from "./CardAnime";
 import Footer from "./Footer/index.js";
 import Signin from "./SignIn/Signin";
 import Signup from "./Signup";

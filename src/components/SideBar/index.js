@@ -180,7 +180,7 @@ const SideBar = (props) => {
   const drawerRef = useRef(null);
   const buttomsOpenRef = useRef(null);
 
-  const { setVisibleSearch } = props;
+  const { setVisible } = props;
 
   const closeDrawer = () => {
     const drawerContainer = drawerRef.current;
@@ -239,7 +239,11 @@ const SideBar = (props) => {
                     <ListItemText primary={"Home"} />
                   </ListItem>
                 </Link>
-                <ListItem onClick={() => setVisibleSearch(true)}>
+                <ListItem
+                  onClick={() => {
+                    setVisible(true);
+                  }}
+                >
                   <ListItemIcon>
                     <IoSearchOutline />
                   </ListItemIcon>

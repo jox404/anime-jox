@@ -32,7 +32,7 @@ import styles from "../../../styles/Signup.module.scss";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Signup(props) {
-  const { signup } = useContext(AuthContext);
+  const { user, signup } = useContext(AuthContext);
   const [formState, setFormState] = useState({
     userName: "",
     email: "",
@@ -89,7 +89,11 @@ export default function Signup(props) {
         "error"
       );
     } else {
-      signup(email, password, userName);
+      try {
+        signup(email, password, userName);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
