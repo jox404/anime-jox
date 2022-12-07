@@ -223,27 +223,26 @@ const SideBar = (props) => {
           >
             <List className={styles.list}>
               <ThemeProvider theme={listCustomized}>
-                <Link href={"/"}>
-                  <ListItem
+                <ListItem
+                  sx={{
+                    minHeight: "35px",
+                    justifyContent: {
+                      xs: "center",
+                      md: "flex-start",
+                    },
+                  }}
+                  onClick={() => window.location.replace("/")}
+                >
+                  <ListItemIcon sx={{ m: { xs: "auto auto", md: 1 } }}>
+                    <IoHomeSharp />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={"Home"}
                     sx={{
-                      minHeight: "35px",
-                      justifyContent: {
-                        xs: "center",
-                        md: "flex-start",
-                      },
+                      display: { xs: "none", md: "block" },
                     }}
-                  >
-                    <ListItemIcon sx={{ m: { xs: "auto auto", md: 1 } }}>
-                      <IoHomeSharp />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={"Home"}
-                      sx={{
-                        display: { xs: "none", md: "block" },
-                      }}
-                    />
-                  </ListItem>
-                </Link>
+                  />
+                </ListItem>
                 <ListItem
                   onClick={() => {
                     setVisible(true);
@@ -252,7 +251,6 @@ const SideBar = (props) => {
                     minHeight: "35px",
                     justifyContent: {
                       xs: "center",
-
                       md: "flex-start",
                     },
                   }}

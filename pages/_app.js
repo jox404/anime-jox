@@ -6,8 +6,8 @@ import { AuthContextProvider, DocContextProvider } from "../src/contexts/";
 import { Quicksand, Ubuntu } from "@next/font/google";
 import { Box } from "@mui/system";
 
-const quicksand = Quicksand({ subsets: ["latin"] });
-const ubuntu = Quicksand({ subsets: ["latin"] });
+const quicksand = Quicksand({ subsets: ["latin"], style: "normal" });
+const ubuntu = Quicksand({ subsets: ["latin"], style: "normal" });
 
 function MyApp({ Component, pageProps }) {
   return (
