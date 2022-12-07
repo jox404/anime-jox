@@ -25,7 +25,7 @@ export default function Footer() {
                 Developed by{" "}
                 <a
                   href="https://www.linkedin.com/in/joaocosta105/"
-                  target={"_blank"}
+                  rel="noopener noreferrer"
                 >
                   <strong>João Ribeiro</strong>
                 </a>
@@ -33,7 +33,11 @@ export default function Footer() {
 
               <Typography variant="body2">
                 All website content is promoted by{" "}
-                <a href="https://kitsu.docs.apiary.io/" target={"_blank"}>
+                <a
+                  href="https://kitsu.docs.apiary.io/"
+                  target={"_blank"}
+                  rel="noopener noreferrer"
+                >
                   <strong>Kitsu API</strong>
                 </a>
               </Typography>
@@ -64,10 +68,16 @@ export default function Footer() {
                 href="https://api.whatsapp.com/send/?phone=11987984340&text&type=phone_number&app_absent=0"
                 target={"_blank"}
                 fontSize={28}
+                rel="noopener noreferrer"
               >
                 <IoLogoWhatsapp />
               </Link>
-              <Link href="###" target={"_blank"} fontSize={28}>
+              <Link
+                href="https://www.linkedin.com/in/joaocosta105/"
+                target={"_blank"}
+                fontSize={28}
+                rel="noopener noreferrer"
+              >
                 <AiFillLinkedin />
               </Link>
             </Box>
@@ -120,6 +130,7 @@ export default function Footer() {
                 href="https://github.com/jox404"
                 target={"_blank"}
                 fontSize={28}
+                rel="noopener noreferrer"
               >
                 <AiFillGithub />
               </Link>
@@ -127,6 +138,7 @@ export default function Footer() {
                 href="https://jox404.github.io/portifolio/"
                 target={"_blank"}
                 fontSize={28}
+                rel="noopener noreferrer"
               >
                 <CgWebsite />
               </Link>

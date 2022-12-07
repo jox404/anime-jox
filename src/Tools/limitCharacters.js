@@ -1,4 +1,4 @@
-export default (text, limit) => {
+const limitCharacters = (text, limit) => {
   if (text) {
     const textLength = text.length;
     text = text.split("");
@@ -11,3 +11,4 @@ export default (text, limit) => {
     return "(unknown)";
   }
 };
+export default limitCharacters;
