@@ -4,13 +4,11 @@ import { dark } from "@mui/material/styles/createPalette";
 
 const DefaultTheme = createTheme({
   palette: {
-    text: {
-      primary: "#000",
-    },
     primary: {
       main: "#f8f8f2",
-      dark: "#EAEAEA",
-      contrastText: "#000",
+      dark: "#c7c7c7",
+      contrastText: "#000000",
+      light: "#ffffff",
     },
     main: {
       main: "#393E46",
@@ -31,8 +29,8 @@ const DefaultTheme = createTheme({
       main: "#F8B400",
     },
     dark: {
-      main: "#050505",
-      dark: "#30302e",
+      main: "#202020",
+      dark: "#000",
       light: "#fff",
       contrastText: "#fff",
     },

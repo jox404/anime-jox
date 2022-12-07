@@ -1,10 +1,9 @@
-import { DeleteOutline, RemoveCircle } from "@mui/icons-material";
+import { RemoveCircle } from "@mui/icons-material";
 import {
   List,
   ListItem,
   Typography,
   Box,
-  ImageList,
   IconButton,
   Rating,
 } from "@mui/material";
@@ -12,7 +11,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { DocContext } from "../../../contexts";
 import limitCharacters from "../../../Tools/limitCharacters";
 import styles from "../../../../styles/AnimeListDrawer.module.scss";
-import { async } from "@firebase/util";
 
 export default function AnimeListDrawer(props) {
   const { currentDrawer } = props;
@@ -94,7 +92,7 @@ export default function AnimeListDrawer(props) {
                     <Typography>{limitCharacters(data.title, 20)}</Typography>
                     <Rating
                       name="animeRating"
-                      value={data.averageRating}
+                      value={parseFloat(data.averageRating)}
                       precision={0.5}
                       readOnly
                     />

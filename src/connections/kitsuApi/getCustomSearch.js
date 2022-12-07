@@ -3,23 +3,24 @@ import handleDontExists from "../../Tools/handleDontExists";
 
 export default async function getCustomSearch(
   link,
-  categories,
+  limit = 18,
   genres,
+  categories,
   season,
   seasonYearFrom,
   seasonYearTo
 ) {
-  var urlBase = `https://kitsu.io/api/edge/anime?&page[limit]=18&sort=popularityRank&fields[anime]=posterImage&`;
+  var urlBase = `https://kitsu.io/api/edge/anime?&page[limit]=${limit}&sort=popularityRank&fields[anime]=posterImage&`;
   if (link) {
     urlBase = link;
   } else {
-    if (categories) {
+    if (categories && categories.length > 0) {
       urlBase = urlBase + `filter[categories]=${categories.toString()}&`;
     }
-    if (genres) {
+    if (genres && genres.length > 0) {
       urlBase = urlBase + `filter[genres]=${genres.toString()}&`;
     }
-    if (season) {
+    if (season && season.length > 0) {
       urlBase = urlBase + `filter[season]=${season.toString()}&`;
     }
     if (seasonYearFrom && seasonYearTo) {
@@ -34,7 +35,7 @@ export default async function getCustomSearch(
 
   var data = [];
   var links;
-  console.log(urlBase, "urlBase");
+
   await axios.get(urlBase).then(async (res) => {
     try {
       res.data.data.map(

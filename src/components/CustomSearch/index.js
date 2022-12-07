@@ -1,13 +1,11 @@
-import { Button, Grid, IconButton, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 
 import { Box } from "@mui/system";
-import { React, Component, useEffect, useState, useRef } from "react";
+import { React, useEffect, useState, useRef } from "react";
 
 import { CardAnime } from "../index";
 
 //ICONS
-import CircularProgress from "@mui/material/CircularProgress";
-import { AiFillDownCircle } from "react-icons/ai";
 import { BsArrowRightShort, BsArrowLeftShort } from "react-icons/bs";
 
 //CSS
@@ -31,8 +29,8 @@ export default function CustomSearch(props) {
     "spring",
     "summer",
   ]);
-  const [yearFromFilter, setYearFromFilter] = useState("2010");
-  const [yearToFilter, setYearToFilter] = useState("2018");
+  const [yearFromFilter, setYearFromFilter] = useState("2018");
+  const [yearToFilter, setYearToFilter] = useState("2022");
   const [links, setLinks] = useState(null);
   const cardsContainerRef = useRef(null);
 
@@ -59,17 +57,18 @@ export default function CustomSearch(props) {
 
   const makeSearch = async (link, ...filters) => {
     if (!link !== null) {
-      const data = await getCustomSearch(link, ...filters);
-      setDataAnime(data.data);
-      setLinks(data.links);
+      const { data, links } = await getCustomSearch(link, ...filters);
+      setDataAnime(data);
+      setLinks(links);
     }
   };
 
   useEffect(() => {
     makeSearch(
       false,
-      categoryFilter,
+      18,
       genreFilter,
+      categoryFilter,
       seasonFilter,
       yearFromFilter,
       yearToFilter
@@ -79,7 +78,7 @@ export default function CustomSearch(props) {
   return (
     <Box className={styles.container}>
       <Box
-        sx={{ display: "flex", mt: 5, mb: 5, justifyContent: "space-around" }}
+        sx={{ display: "flex", mt: 5, mb: 5, justifyContent: "space-between" }}
       >
         <Filter
           title={"Category"}
@@ -106,7 +105,13 @@ export default function CustomSearch(props) {
               label="From"
               value={yearFromFilter}
               onChange={(event) => {
-                setYearFromFilter(event);
+                if (event !== null) {
+                  const value =
+                    event.$y != "NaN" ? event.$y.toString() : undefined;
+                  setYearFromFilter(value);
+                } else {
+                  setYearFromFilter(undefined);
+                }
               }}
               renderInput={({ inputRef, inputProps, InputProps }) => {
                 return (
@@ -129,7 +134,13 @@ export default function CustomSearch(props) {
               label="To"
               value={yearToFilter}
               onChange={(event) => {
-                setYearToFilter(event);
+                if (event !== null) {
+                  const value =
+                    event.$y != "NaN" ? event.$y.toString() : undefined;
+                  setYearToFilter(value);
+                } else {
+                  setYearToFilter(undefined);
+                }
               }}
               renderInput={({ inputRef, inputProps, InputProps }) => {
                 return (
@@ -147,16 +158,31 @@ export default function CustomSearch(props) {
             />
           </LocalizationProvider>
         </Box>
-        {/*  <Filter title={"Status"} list /> */}
-        {/*   <Filter title={"Year"} list /> */}
-        <Button onClick={() => makeSearch()}>Search</Button>
+
+        <Button
+          onClick={() =>
+            makeSearch(
+              false,
+              18,
+              genreFilter,
+              categoryFilter,
+              seasonFilter,
+              yearFromFilter,
+              yearToFilter
+            )
+          }
+          variant={"contained"}
+        >
+          Search
+        </Button>
       </Box>
+
       <Box mt={2} sx={{ minHeight: 0 }}>
         {dataAnime.length > 0 ? (
           <Grid
             container
             spacing={2}
-            style={{ display: "flex", justifyContent: "left" }}
+            style={{ display: "flex", justifyContent: "center" }}
             ref={cardsContainerRef}
           >
             {dataAnime.map((anime, index) => {
@@ -166,13 +192,12 @@ export default function CustomSearch(props) {
                   key={index + "card"}
                   xs={12}
                   sm={4}
-                  md={3}
+                  md={4}
                   lg={2}
                   xl={2}
                   sx={{
                     display: "flex",
                     justifyContent: "center",
-                    width: 0,
                     flexBasis: 0,
                   }}
                 >
@@ -238,15 +263,4 @@ export default function CustomSearch(props) {
       </Box>
     </Box>
   );
-}
-
-{
-  /* <CircularProgress
-              sx={{
-                display: `${
-                  this.state.loadingAnimes === true ? "flex" : "none"
-                }`,
-                marginTop: 40,
-              }}
-            /> */
 }

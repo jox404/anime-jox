@@ -20,8 +20,14 @@ export default function MainContainer({ children }, props) {
           renderSideBarAndFooter
             ? { width: "100vw" }
             : {
-                width: "calc(100vw - 300px)",
-                marginLeft: "300px",
+                width: {
+                  xs: "calc(100vw - 50px)",
+                  md: "calc(100vw - 300px)",
+                },
+                marginLeft: {
+                  xs: "50px",
+                  md: "300px",
+                },
               }
         }
       >

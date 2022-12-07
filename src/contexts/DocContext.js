@@ -15,12 +15,12 @@ const DocContext = createContext();
 const DocContextProvider = ({ children }) => {
   const [userAnimeData, setUserAnimeData] = useState(null);
   const { user } = useContext(AuthContext);
-  const userRef = doc(db, "users", "gtsk0ZYtJSRB0eTSrXhkwizVaec2");
+
+  const userRef = user ? doc(db, "users", user.uid) : null;
 
   const updateLocalStorage = async () => {
     const dataDoc = await getDoc(userRef);
     const animeData = await handleDontExistsFirebase(dataDoc);
-
     localStorage.setItem("animeData", JSON.stringify(animeData));
     setUserAnimeData(null);
   };
@@ -48,15 +48,18 @@ const DocContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    updateLocalStorage();
-  }, []);
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("animeData"));
-    if (data) {
-      setUserAnimeData(data);
+    if (user) {
+      (async () => {
+        await updateLocalStorage();
+        const data = JSON.parse(localStorage.getItem("animeData"));
+        if (data) {
+          setUserAnimeData(data);
+        }
+      })();
+    } else {
+      setUserAnimeData(null);
     }
-  }, [userAnimeData === null]);
+  }, [user]);
 
   return (
     <DocContext.Provider value={{ updateAnimeList, userAnimeData }}>

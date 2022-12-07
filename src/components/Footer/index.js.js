@@ -13,7 +13,11 @@ export default function Footer() {
   return (
     <>
       <Box className={styles.footer} component={"footer"}>
-        <Container maxWidth={"lg"} className={styles.container}>
+        <Container
+          maxWidth={"lg"}
+          className={styles.container}
+          sx={{ display: "flex" }}
+        >
           <Box>
             <Box>
               <Image src={logo} width={60} height={60} />

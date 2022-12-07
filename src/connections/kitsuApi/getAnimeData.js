@@ -64,7 +64,7 @@ export default async function getAnimeData(id) {
                 "description",
               ]),
               thumbnail: await handleDontExists(
-                "text",
+                "thumbnail",
                 episode.attributes.thumbnail,
                 ["original", "medium", "small", "large", "tiny"]
               ),

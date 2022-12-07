@@ -32,9 +32,15 @@
       .list {
         display: flex;
         flex-direction: column;
+        width: 100%;
         padding: 0;
         align-items: center;
         margin: 15px 0px;
+
+        .userDrawerInBottom {
+          display: flex;
+          margin-top: auto;
+        }
       }
       .yourList {
         overflow-x: scroll;
@@ -84,5 +90,33 @@
   100% {
     margin-left: -100px;
     display: none;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .container {
+    width: 50px;
+  }
+  .drawer {
+    width: 300px;
+  }
+  @keyframes showDrawerAnime {
+    0% {
+      margin-left: -350px;
+    }
+    100% {
+      margin-left: 50px;
+    }
+  }
+
+  @keyframes hideDrawerAnime {
+    0% {
+      margin-left: 50px;
+      display: flex;
+    }
+    100% {
+      margin-left: -350px;
+      display: none;
+    }
   }
 }

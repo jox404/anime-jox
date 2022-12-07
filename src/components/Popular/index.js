@@ -20,10 +20,10 @@ export default function Popular(props) {
         <Typography variant="h1" textAlign={"center"}>
           Popular Anime
         </Typography>
-        <Box sx={{ minHeight: 900 }}>
+        <Box>
           <Grid
             container
-            style={{ display: "flex", justifyContent: "left" }}
+            style={{ display: "flex", justifyContent: "center" }}
             spacing={2}
           >
             <CircularProgress
@@ -37,16 +37,16 @@ export default function Popular(props) {
                 <Grid
                   item
                   key={index}
-                  xs={index === 0 || index === 1 ? 6 : 6}
-                  sm={index === 0 || index === 1 ? 6 : 4}
+                  xs={index === 0 || index === 1 ? 12 : 6}
+                  sm={index === 0 || index === 1 ? 6 : 6}
                   md={index === 0 || index === 1 ? 6 : 3}
                   lg={index === 0 || index === 1 ? 6 : 2}
                   xl={index === 0 || index === 1 ? 6 : 2}
                   sx={{
                     display: "flex",
                     justifyContent: "center",
-                    width: 0,
                     flexBasis: 0,
+                    width: "100%",
                   }}
                 >
                   <CardAnime
@@ -57,7 +57,7 @@ export default function Popular(props) {
                         : anime.posterImage
                     }
                     id={anime.id}
-                    size={index === 0 || index === 1 ? "large" : "medium"}
+                    size={index === 0 || index === 1 ? "large" : "small"}
                   />
                 </Grid>
               );

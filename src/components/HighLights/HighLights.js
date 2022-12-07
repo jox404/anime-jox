@@ -79,7 +79,7 @@ export default function HighLights(props) {
                   <Typography component={"h6"}>Rating</Typography>
                   <Rating
                     name="animeRating"
-                    value={anime.averageRating}
+                    value={parseFloat(anime.averageRating)}
                     precision={0.5}
                     readOnly
                   />

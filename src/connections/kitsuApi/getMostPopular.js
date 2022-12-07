@@ -7,7 +7,7 @@ export default async function getMostPopular(amount) {
   var data = [];
   await axios
     .get(
-      `https://kitsu.io/api/edge/anime?page[limit]=${amount}&sort=popularityRank&fields[anime]=posterImage,titles,coverImage,averageRating,synopsis,genres`
+      `https://kitsu.io/api/edge/anime?page[limit]=${amount}&sort=popularityRank&fields[anime]=posterImage,titles,coverImage,averageRating,synopsis,genres&filter[seasonYear]=2021..&`
     )
     .then((res) => {
       try {

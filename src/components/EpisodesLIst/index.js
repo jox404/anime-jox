@@ -9,6 +9,7 @@ import handleDontExists from "../../Tools/handleDontExists";
 export default function EpisodesList(props) {
   const { episode, animeData, movie } = props;
   var data = episode;
+  console.log(data.thumbnail);
   if (movie) {
     data = animeData;
   }

@@ -51,24 +51,25 @@ const filter = createTheme({
         },
       },
     },
+
     MuiSelect: {
       styleOverrides: {
         root: {
           boxShadow: "none",
           ".MuiOutlinedInput-notchedOutline": { border: 0 },
           ".MuiOutlinedInput-input": { padding: "5px 20px 5px 20px" },
+          ".MuiSelect-select": {
+            padding: 0,
+          },
           color: "#808080",
           borderRadius: 10,
-
-          textAlign: "center",
+          textAlign: "left",
           transition: "0.5s",
-          /*   backgroundColor: "#303030", */
           svg: {
             color: "#808080",
             transition: "0.5s",
           },
           ":hover": {
-            /* backgroundColor: "#606060", */
             transition: "0.5s",
             color: "#fff",
             svg: {
@@ -114,10 +115,11 @@ export default function Filter(props) {
 
   return (
     <ThemeProvider theme={filter}>
-      <FormControl sx={{ m: 1, width: 200 }}>
+      <FormControl sx={{ margin: "8px 0px" }}>
         <Select
           multiple
           value={value}
+          displayEmpty={true}
           renderValue={() => `${title}`}
           variant={"outlined"}
           onChange={handleChange}

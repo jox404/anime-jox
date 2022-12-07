@@ -2,11 +2,6 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
 
-/* fonts google */
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,700&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
-
 html,
 body {
   padding: 0;
@@ -26,6 +21,7 @@ a {
 
 h2 {
   font-size: 3rem;
+  font-weight: 600;
 }
 p {
   font-size: 1.2rem;
@@ -37,6 +33,7 @@ p {
   text-decoration: none;
   list-style: none;
   font-family: "Quicksand", sans-serif;
+  font-weight: 500;
   ::-webkit-scrollbar {
     width: 8px;
   }

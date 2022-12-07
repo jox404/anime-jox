@@ -1,22 +1,22 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import styles from "../../../styles/Card.module.scss";
 
 export default function CardAnime(props) {
   const { bgImage, id, size } = props;
-  var height;
+  var length;
   switch (size) {
     case "small":
-      height = 200;
+      length = 200;
       break;
     case "medium":
-      height = 250;
+      length = 250;
       break;
     case "large":
-      height = 400;
+      length = 450;
       break;
     default:
-      height = 300;
+      length = 300;
       break;
   }
 
@@ -25,8 +25,12 @@ export default function CardAnime(props) {
       className={styles.container}
       sx={{
         bgcolor: "#212121",
-        height: height,
+        height:
+          size === "large"
+            ? { xs: length / 2, lg: length / 1.25, xl: length }
+            : length,
         display: "flex",
+        width: size === "large" ? "100%" : length,
         backgroundImage: `url( ${bgImage} )`,
       }}
       component={"a"}

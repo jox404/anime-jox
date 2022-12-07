@@ -1,5 +1,6 @@
 .container {
-  width: 80vw;
+  width: calc(100vw - 300px);
+  /* margin-left: 300px; */
   height: 100vh;
   position: absolute;
   z-index: 2;
