@@ -9,6 +9,7 @@ import Footer from "./Footer/index.js";
 import Signin from "./SignIn/Signin";
 import Signup from "./Signup";
 import Search from "./Search";
+import KeepWatching from "./KeepWatching";
 
 export {
   SideBar,
@@ -22,4 +23,5 @@ export {
   Signin,
   Signup,
   Search,
+  KeepWatching,
 };

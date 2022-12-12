@@ -88,8 +88,8 @@ const listCustomized = createTheme({
     MuiTypography: {
       styleOverrides: {
         root: {
-          fontFamily: "Quicksand",
-          fontWeight: 500,
+          fontFamily: "Ubuntu",
+          fontWeight: 400,
         },
       },
     },
@@ -163,7 +163,7 @@ const ClickOutside = (ref, closeFunc, containerRef) => {
 
 const SideBar = (props) => {
   const { user } = useContext(AuthContext);
-  const [currentDrawer, setCurrentDrawer] = useState(null);
+  const [currentDrawer, setCurrentDrawer, updateUserAnimeData] = useState(null);
   const drawerRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -194,8 +194,6 @@ const SideBar = (props) => {
     }
     setCurrentDrawer(drawerName);
   };
-  console.log(user);
-
   ClickOutside(drawerRef, closeDrawer, containerRef);
 
   return (
@@ -211,7 +209,7 @@ const SideBar = (props) => {
         <Box className={styles.top}>
           <Box className={styles.logo}>
             <Box href={"/"} component={"a"}>
-              <Image src={logo} width={80} height={80} />
+              <Image src={logo} width={80} height={80} alt={"logo"} />
             </Box>
           </Box>
           <Box
@@ -282,8 +280,9 @@ const SideBar = (props) => {
                 <Typography
                   variant="h2"
                   sx={{
-                    pl: "25px",
+                    pl: "35px",
                     mb: 1,
+                    mt: 2,
                     width: "100%",
                     textAlign: "left",
                     fontSize: 19,
@@ -325,7 +324,7 @@ const SideBar = (props) => {
                 })}
                 <Divider
                   variant="middle"
-                  sx={{ borderColor: "#303030", width: "97%", mt: 2 }}
+                  sx={{ borderColor: "#303030", width: "97%" }}
                   className={styles.userDrawerInBottom}
                 />
                 {user === null ? (
@@ -355,7 +354,7 @@ const SideBar = (props) => {
                       }}
                       onClick={() => openDrawer("userDrawer")}
                     >
-                      <ListItemAvatar sx={{ minWidth: 0, p: "5px" }}>
+                      <ListItemAvatar sx={{ minWidth: 0, p: "0px" }}>
                         <Avatar
                           src={
                             "https://images.pexels.com/photos/906052/pexels-photo-906052.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -366,6 +365,7 @@ const SideBar = (props) => {
                             height: 34,
                             m: { xs: "auto auto", md: 1 },
                           }}
+                          alt={"user avatar"}
                         />
                       </ListItemAvatar>
 

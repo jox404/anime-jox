@@ -6,12 +6,15 @@ import { AuthContextProvider, DocContextProvider } from "../src/contexts/";
 import { Quicksand, Ubuntu } from "@next/font/google";
 import { Box } from "@mui/system";
 
-const quicksand = Quicksand({ subsets: ["latin"], style: "normal" });
-const ubuntu = Quicksand({ subsets: ["latin"], style: "normal" });
+const quicksand = Quicksand({
+  subsets: ["latin"],
+  weight: "700",
+});
+/* const ubuntu = Ubuntu({ weight: "500" }); */
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Box className={[quicksand.className, ubuntu.className]}>
+    <Box className={[quicksand.className /*  ubuntu.className */]}>
       <AuthContextProvider>
         <DocContextProvider>
           <ThemeProvider theme={DefaultTheme}>

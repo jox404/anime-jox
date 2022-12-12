@@ -20,7 +20,7 @@ export default function Footer() {
         >
           <Box>
             <Box>
-              <Image src={logo} width={60} height={60} />
+              <Image src={logo} width={60} height={60} alt={"logo"} />
               <Typography variant="body2">
                 Developed by{" "}
                 <a

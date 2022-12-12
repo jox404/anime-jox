@@ -1,19 +1,23 @@
 import React from "react";
 import { Box } from "@mui/material";
 import styles from "../../../styles/Card.module.scss";
+import { AiFillAlert, AiOutlinePlayCircle } from "react-icons/ai";
 
 export default function CardAnime(props) {
-  const { bgImage, id, size } = props;
+  const { bgImage, id, size, video } = props;
   var length;
   switch (size) {
     case "small":
       length = 200;
       break;
     case "medium":
-      length = 250;
+      length = 300;
       break;
     case "large":
       length = 450;
+      break;
+    case "extraSmall":
+      length = 200;
       break;
     default:
       length = 300;
@@ -23,19 +27,43 @@ export default function CardAnime(props) {
   return (
     <Box
       className={styles.container}
-      sx={{
-        bgcolor: "#212121",
-        height:
-          size === "large"
-            ? { xs: length / 2, lg: length / 1.25, xl: length }
-            : length,
-        display: "flex",
-        width: size === "large" ? "100%" : length,
-        backgroundImage: `url( ${bgImage} )`,
-      }}
+      sx={[
+        {
+          bgcolor: "#212121",
+          display: "flex",
+          backgroundImage: `url( ${bgImage} )`,
+        },
+        size === "large"
+          ? {
+              height: { xs: length / 2, lg: length / 1.25, xl: length },
+              width: "100%",
+            }
+          : size === "medium"
+          ? {
+              height: length / 1.1,
+              width: "100%",
+            }
+          : size === "extraSmall"
+          ? {
+              height: length / 1.3,
+              width: "100%",
+            }
+          : {
+              height: length,
+              width: length,
+            },
+      ]}
       component={"a"}
       href={`/animes/${id}`}
       target={"_blank"}
-    ></Box>
+    >
+      {video ? (
+        <Box className={styles.video}>
+          <AiOutlinePlayCircle />
+        </Box>
+      ) : (
+        <></>
+      )}
+    </Box>
   );
 }

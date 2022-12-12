@@ -21,7 +21,7 @@ export default async function handleDontExists(type, obj, values) {
 
         if (prop) {
           data = obj[prop];
-        } else {
+        } else if (prop) {
           switch (type) {
             case "text":
               data = "Unknown";

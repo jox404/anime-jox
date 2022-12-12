@@ -16,7 +16,8 @@ import { Container } from "@mui/system";
 
 export default function AnimePage(props) {
   const { animeData, id } = props;
-  const { updateAnimeList, userAnimeData } = useContext(DocContext);
+  const { updateAnimeList, userAnimeData, updateUserAnimeData } =
+    useContext(DocContext);
   const [listStatuses, setListStatuses] = useState({
     favorites: false,
     seeLater: false,
@@ -81,11 +82,15 @@ export default function AnimePage(props) {
     );
     setRecommendations(data);
   };
+  getRecommendations();
 
   useEffect(() => {
-    InitialStatuses();
-    getRecommendations();
+    updateUserAnimeData();
   }, []);
+  useEffect(() => {
+    InitialStatuses();
+  }, [userAnimeData]);
+
   return (
     <>
       <Container maxWidth={"lg"}>
@@ -110,8 +115,13 @@ export default function AnimePage(props) {
               <Typography variant="h1">{animeData.title}</Typography>
               <Typography variant="caption">{animeData.title}</Typography>
               <Typography variant="subtitle1">
-                {animeData.startDate.slice(0, 4)} -{" "}
-                {animeData.endDate.slice(0, 4)}
+                {animeData.startDate !== null
+                  ? animeData.startDate.slice(0, 4)
+                  : "teste"}{" "}
+                -{" "}
+                {animeData.endDate !== null
+                  ? animeData.endDate.slice(0, 4)
+                  : "teste"}
               </Typography>
 
               <Typography component={"p"}>
@@ -199,19 +209,7 @@ export default function AnimePage(props) {
             <Box className={styles.episodesList}>
               <Typography component={"h2"}>Episodes</Typography>
               <Box className={styles.containerEpisodes}>
-                {animeData.episodesList.map((episode, index) => {
-                  return (
-                    <EpisodesList
-                      episode={episode}
-                      animeData={{
-                        thumbnail: animeData.posterImage,
-                        title: animeData.title,
-                      }}
-                      movie={isMovie}
-                      key={`episode${index}`}
-                    />
-                  );
-                })}
+                <EpisodesList animeData={animeData.episodesList} />
               </Box>
             </Box>
             <Box className={styles.description}>

@@ -7,4 +7,28 @@
   background-size: cover;
   background-repeat: no-repeat;
   cursor: pointer;
+  .video {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    transition: 0.5s;
+    svg {
+      transition: 0.2s;
+      font-size: 50px;
+      color: rgb(209, 209, 209);
+    }
+  }
+  .video:hover {
+    transition: 0.5s;
+    background-color: rgba(0, 0, 0, 0);
+    svg {
+      transition: 0.2s;
+      color: #fff;
+      font-size: 60px;
+    }
+  }
 }

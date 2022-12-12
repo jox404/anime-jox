@@ -1,6 +1,11 @@
 import { Box } from "@mui/material";
 import { Container } from "@mui/system";
-import { Famous, HighLights, Popular, CustomSearch } from "../src/components";
+import {
+  HighLights,
+  Popular,
+  CustomSearch,
+  KeepWatching,
+} from "../src/components";
 import getFilters from "../src/connections/kitsuApi/getFilters";
 import getMostPopular from "../src/connections/kitsuApi/getMostPopular";
 import styles from "../styles/Home.module.scss";
@@ -26,6 +31,7 @@ export default function Home({ popular, categories, genres }) {
       <Container maxWidth={"lg"}>
         <CustomSearch categories={categories} genres={genres} />
         <Popular animeList={popular} />
+        <KeepWatching />
       </Container>
     </Box>
   );

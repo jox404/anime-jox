@@ -17,7 +17,13 @@ export default function Popular(props) {
   return (
     <>
       <Box className={styles.container}>
-        <Typography variant="h1" textAlign={"center"}>
+        <Typography
+          variant="h3"
+          textAlign={"left"}
+          fontSize={30}
+          fontWeight={600}
+          mb={2}
+        >
           Popular Anime
         </Typography>
         <Box>

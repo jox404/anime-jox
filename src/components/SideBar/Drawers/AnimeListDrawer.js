@@ -14,7 +14,8 @@ import styles from "../../../../styles/AnimeListDrawer.module.scss";
 
 export default function AnimeListDrawer(props) {
   const { currentDrawer } = props;
-  const { updateAnimeList, userAnimeData } = useContext(DocContext);
+  const { updateAnimeList, userAnimeData, updateUserAnimeData } =
+    useContext(DocContext);
   const [animeList, setAnimeList] = useState([]);
   const refAnimeList = useRef(null);
 
@@ -56,7 +57,10 @@ export default function AnimeListDrawer(props) {
 
   useEffect(() => {
     updateList();
-  }, [currentDrawer, userAnimeData]);
+  }, [currentDrawer]);
+  useEffect(() => {
+    updateUserAnimeData();
+  }, [animeList]);
 
   return (
     <Box sx={{ width: "100%", overflowX: "auto" }}>

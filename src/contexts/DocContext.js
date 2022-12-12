@@ -31,7 +31,7 @@ const DocContextProvider = ({ children }) => {
         await updateDoc(userRef, {
           [`animeList.${listName}`]: arrayUnion(data),
         });
-        updateLocalStorage();
+        updateUserAnimeData();
       } catch (error) {
         console.log(error);
       }
@@ -40,29 +40,35 @@ const DocContextProvider = ({ children }) => {
         await updateDoc(userRef, {
           [`animeList.${listName}`]: arrayRemove(data),
         });
-        updateLocalStorage();
+        updateUserAnimeData();
       } catch (error) {
         console.log(error);
       }
     }
   };
 
-  useEffect(() => {
+  const updateUserAnimeData = () => {
     if (user) {
       (async () => {
         await updateLocalStorage();
         const data = JSON.parse(localStorage.getItem("animeData"));
-        if (data) {
+        if (data || data !== userAnimeData) {
           setUserAnimeData(data);
         }
       })();
     } else {
       setUserAnimeData(null);
     }
+  };
+
+  useEffect(() => {
+    updateUserAnimeData();
   }, [user]);
 
   return (
-    <DocContext.Provider value={{ updateAnimeList, userAnimeData }}>
+    <DocContext.Provider
+      value={{ updateAnimeList, userAnimeData, updateUserAnimeData }}
+    >
       {children}
     </DocContext.Provider>
   );

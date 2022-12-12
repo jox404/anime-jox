@@ -8,6 +8,7 @@ export default async function getAnimeData(id) {
   await axios.get(url).then(async (response) => {
     const data = response.data.data;
     dataAnime = {
+      id: id,
       posterImage: await handleDontExists("text", data.attributes.posterImage, [
         "small",
         "medium",
