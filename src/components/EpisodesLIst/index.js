@@ -21,7 +21,7 @@ export default function EpisodesList(props) {
       {animeData.map((anime, index) => {
         if (index < episodesLimit) {
           return (
-            <Box className={styles.episode}>
+            <Box className={styles.episode} key={index}>
               <Box className={styles.containerThumbnail}>
                 <img
                   src={anime.thumbnail || "???"}
