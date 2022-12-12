@@ -3,18 +3,11 @@ import MainContainer from "../src/components/MainContainer/MainContainer";
 import "../styles/globals.scss";
 import DefaultTheme from "../src/Themes/DefaultTheme";
 import { AuthContextProvider, DocContextProvider } from "../src/contexts/";
-import { Quicksand, Ubuntu } from "@next/font/google";
 import { Box } from "@mui/system";
-
-const quicksand = Quicksand({
-  subsets: ["latin"],
-  weight: "700",
-});
-/* const ubuntu = Ubuntu({ weight: "500" }); */
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Box className={[quicksand.className /*  ubuntu.className */]}>
+    <Box>
       <AuthContextProvider>
         <DocContextProvider>
           <ThemeProvider theme={DefaultTheme}>

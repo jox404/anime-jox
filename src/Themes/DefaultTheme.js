@@ -47,13 +47,19 @@ const DefaultTheme = createTheme({
       main: orange[600],
     },
   },
+  typography: {
+    allVariants: {
+      fontFamily: `Quicksand, Ubuntu,"Roboto", "Helvetica", "Arial", sans-serif `,
+      fontSize: 14,
+      fontWeightLight: 300,
+      fontWeightRegular: 400,
+      fontWeightMedium: 500,
+    },
+  },
   components: {
-    // Name of the component
     MuiButton: {
       styleOverrides: {
-        // Name of the slot
         root: {
-          // Some CSS
           fontSize: "0.9rem",
           borderRadius: 15,
           textTransform: "unset",
@@ -61,13 +67,18 @@ const DefaultTheme = createTheme({
         },
       },
     },
-    MuiTypography: {
+    /* MuiTypography: {
       styleOverrides: {
         root: {
-          fontFamily: "Quicksand",
+          fontFamily: ["Quicksand", ""],
+          fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
+          fontSize: 14,
+          fontWeightLight: 300,
+          fontWeightRegular: 400,
+          fontWeightMedium: 500,
         },
       },
-    },
+    }, */
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
