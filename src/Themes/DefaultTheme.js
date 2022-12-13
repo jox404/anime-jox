@@ -50,10 +50,15 @@ const DefaultTheme = createTheme({
   typography: {
     allVariants: {
       fontFamily: `Quicksand, Ubuntu,"Roboto", "Helvetica", "Arial", sans-serif `,
-      fontSize: 14,
+      fontSize: 18,
+      fontWeight: 400,
       fontWeightLight: 300,
       fontWeightRegular: 400,
       fontWeightMedium: 500,
+    },
+    body2: {
+      fontSize: 15,
+      fontWeight: 400,
     },
   },
   components: {
@@ -63,7 +68,7 @@ const DefaultTheme = createTheme({
           fontSize: "0.9rem",
           borderRadius: 15,
           textTransform: "unset",
-          fontWeight: 400,
+          fontWeight: 600,
         },
       },
     },

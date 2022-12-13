@@ -10,6 +10,8 @@ import Signin from "./SignIn/Signin";
 import Signup from "./Signup";
 import Search from "./Search";
 import KeepWatching from "./KeepWatching";
+import AnimeListDrawer from "./Drawers/AnimeListDrawer";
+import UserDrawer from "./Drawers/UserDrawer";
 
 export {
   SideBar,
@@ -24,4 +26,6 @@ export {
   Signup,
   Search,
   KeepWatching,
+  UserDrawer,
+  AnimeListDrawer,
 };

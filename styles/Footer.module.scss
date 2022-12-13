@@ -2,6 +2,28 @@
   background-color: #181818;
   width: 100%;
   padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > :last-child {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    max-width: 850px;
+  }
+
+  a {
+    transition: 0.5s;
+    color: #e4e4e4;
+  }
+  a:hover {
+    transition: 0.5s;
+    color: #fff;
+    text-decoration: underline;
+  }
 }
 
 .container {
@@ -13,6 +35,7 @@
   > div {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    /*  max-width: 250px; */
   }
 }

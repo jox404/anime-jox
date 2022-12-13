@@ -8,9 +8,11 @@ import {
   Rating,
 } from "@mui/material";
 import { useContext, useEffect, useRef, useState } from "react";
-import { DocContext } from "../../../contexts";
-import limitCharacters from "../../../Tools/limitCharacters";
-import styles from "../../../../styles/AnimeListDrawer.module.scss";
+import { DocContext } from "../../contexts";
+import limitCharacters from "../../Tools/limitCharacters";
+import styles from "../../../styles/AnimeListDrawer.module.scss";
+import animePageIconsButtom from "../../../public/assets/images/animePageIconsButtom.png";
+import Image from "next/image";
 
 export default function AnimeListDrawer(props) {
   const { currentDrawer } = props;
@@ -113,6 +115,26 @@ export default function AnimeListDrawer(props) {
               </ListItem>
             );
           })
+        ) : currentDrawer ? (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Typography fontSize={20} textAlign={"center"} mt={10}>
+              You Don't Have Animes In This List
+            </Typography>
+            <Typography fontSize={13} textAlign={"center"} mt={1} mb={2}>
+              You may add animes to the list clicking in the icons buttons, on
+              the anime page.
+            </Typography>
+            <Image
+              src={animePageIconsButtom}
+              style={{ borderRadius: "10px" }}
+            />
+          </Box>
         ) : (
           <></>
         )}

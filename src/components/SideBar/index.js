@@ -1,10 +1,8 @@
 import styles from "../../../styles/SideBar.module.scss";
 import { Box } from "@mui/system";
-import { LogoDev } from "@mui/icons-material";
 
 import {
   Avatar,
-  Button,
   createTheme,
   Divider,
   List,
@@ -21,13 +19,14 @@ import {
   MdOutlineAccessTimeFilled,
   MdRemoveRedEye,
 } from "react-icons/md";
-import { IoSettingsSharp, IoSearchOutline, IoHomeSharp } from "react-icons/io5";
-import Link from "next/link";
-import { useContext, useEffect, useRef, useState } from "react";
-import AnimeListDrawer from "./Drawers/AnimeListDrawer";
-import UserDrawer from "./Drawers/UserDrawer";
-import { DocContext, AuthContext } from "../../contexts";
+import { IoSearchOutline, IoHomeSharp } from "react-icons/io5";
+
+import { RiLoginBoxFill } from "react-icons/ri";
 import logo from "../../../public/assets/icons/logo.svg";
+import profile from "../../../public/assets/images/profile.jpeg";
+import { useContext, useEffect, useRef, useState } from "react";
+import { AnimeListDrawer, UserDrawer } from "../index";
+import { AuthContext } from "../../contexts";
 import Image from "next/image";
 
 const listColors = {
@@ -163,7 +162,7 @@ const ClickOutside = (ref, closeFunc, containerRef) => {
 
 const SideBar = (props) => {
   const { user } = useContext(AuthContext);
-  const [currentDrawer, setCurrentDrawer, updateUserAnimeData] = useState(null);
+  const [currentDrawer, setCurrentDrawer] = useState(null);
   const drawerRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -298,7 +297,13 @@ const SideBar = (props) => {
                     <ListItem
                       key={index}
                       selected={currentDrawer === item.name}
-                      onClick={() => openDrawer(item.name)}
+                      onClick={() => {
+                        if (user) {
+                          openDrawer(item.name);
+                        } else {
+                          window.location.replace("/auth/signin");
+                        }
+                      }}
                       sx={{
                         minHeight: "35px",
                         justifyContent: {
@@ -328,19 +333,23 @@ const SideBar = (props) => {
                   className={styles.userDrawerInBottom}
                 />
                 {user === null ? (
-                  <Link href={"/auth/signin"}>
-                    <ListItem
-                      selected={false}
-                      sx={{
-                        marginTop: 1,
-                      }}
-                    >
-                      <ListItemIcon>
-                        <IoSettingsSharp />
-                      </ListItemIcon>
-                      <ListItemText primary={"Signin/Signup"} />
-                    </ListItem>
-                  </Link>
+                  <ListItem
+                    selected={false}
+                    sx={{
+                      marginTop: 1,
+                      minHeight: "35px",
+                      justifyContent: {
+                        xs: "center",
+                        md: "flex-start",
+                      },
+                    }}
+                    onClick={() => window.location.replace("/auth/signin")}
+                  >
+                    <ListItemIcon sx={{ m: { xs: "auto auto", md: 1 } }}>
+                      <RiLoginBoxFill />
+                    </ListItemIcon>
+                    <ListItemText primary={"Sign in/Sign up"} />
+                  </ListItem>
                 ) : (
                   <>
                     <ListItem
@@ -356,9 +365,7 @@ const SideBar = (props) => {
                     >
                       <ListItemAvatar sx={{ minWidth: 0, p: "0px" }}>
                         <Avatar
-                          src={
-                            "https://images.pexels.com/photos/906052/pexels-photo-906052.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                          }
+                          /* src={"../../../public/assets/images/profile.jpeg"} */
                           variant="rounded"
                           sx={{
                             width: 34,
@@ -366,7 +373,16 @@ const SideBar = (props) => {
                             m: { xs: "auto auto", md: 1 },
                           }}
                           alt={"user avatar"}
-                        />
+                        >
+                          <Image
+                            src={profile}
+                            style={{
+                              width: 34,
+                              height: 34,
+                              objectFit: "cover",
+                            }}
+                          />
+                        </Avatar>
                       </ListItemAvatar>
 
                       <Box

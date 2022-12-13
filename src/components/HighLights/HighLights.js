@@ -61,8 +61,12 @@ export default function HighLights(props) {
           >
             <Container maxWidth={"lg"}>
               <Box className={styles.animeDescription}>
-                <h2>{anime.title}</h2>
-                <p>{limitCharacters(anime.synopsis, 200) + "..."}</p>
+                <Typography variant="h2" fontSize={55} fontWeight={700}>
+                  {anime.title}
+                </Typography>
+                <Typography variant="caption" className={styles.resume}>
+                  {limitCharacters(anime.synopsis, 200)}
+                </Typography>
                 <div className={styles.btnContainer}>
                   <Button
                     variant="contained"
@@ -87,7 +91,10 @@ export default function HighLights(props) {
                 <Box>
                   <Typography component={"h6"}>Genres</Typography>
                   <Box className={styles.genresList}>
-                    {anime.genresList.join().replaceAll(",", ", ")}
+                    {limitCharacters(
+                      anime.genresList.join().replaceAll(",", ", "),
+                      100
+                    )}
                   </Box>
                 </Box>
               </Box>

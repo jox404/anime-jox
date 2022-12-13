@@ -22,6 +22,12 @@ export default async function getAnimeData(id) {
         "en_jp",
         "ja_jp",
       ]),
+      alternativeTitle: await handleDontExists("text", data.attributes.titles, [
+        "ja_jp",
+        "en_jp",
+        "en_us",
+        "en",
+      ]),
       synopsis: await handleDontExists("text", data.attributes, [
         "synopsis",
         "description",

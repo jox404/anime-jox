@@ -112,98 +112,107 @@ export default function AnimePage(props) {
               <img src={animeData.posterImage}></img>
             </Box>
             <Box className={styles.infos}>
-              <Typography variant="h1">{animeData.title}</Typography>
-              <Typography variant="caption">{animeData.title}</Typography>
-              <Typography variant="subtitle1">
-                {animeData.startDate !== null
-                  ? animeData.startDate.slice(0, 4)
-                  : "teste"}{" "}
-                -{" "}
-                {animeData.endDate !== null
-                  ? animeData.endDate.slice(0, 4)
-                  : "teste"}
-              </Typography>
+              <Box>
+                <Typography variant="h1">{animeData.title}</Typography>
+                <Typography variant="caption" fontSize={15}>
+                  {animeData.alternativeTitle}
+                </Typography>
+                <Typography variant="subtitle1" fontSize={13}>
+                  {animeData.startDate !== null
+                    ? animeData.startDate.slice(0, 4)
+                    : "teste"}{" "}
+                  -{" "}
+                  {animeData.endDate !== null
+                    ? animeData.endDate.slice(0, 4)
+                    : "teste"}
+                </Typography>
 
-              <Typography component={"p"}>
-                {animeData.genresList.join().replaceAll(",", ", ")}
-              </Typography>
-
-              <Rating
-                name="animeRating"
-                value={4.5}
-                precision={0.5}
-                readOnly
-                sx={{ mb: 3 }}
-              />
-              <Box sx={{ mb: 3 }}>
-                <IconButton
-                  sx={{
-                    ":hover": { bgcolor: "#ff555525" },
-                  }}
-                  onClick={async () => {
-                    updateAnimeList(
-                      listStatuses.favorites,
-                      dataAnimeList,
-                      "favorites"
-                    );
-                    handleUpdateStatuses("favorites");
-                  }}
-                >
-                  <MdFavorite
-                    color={listStatuses.favorites !== true ? "#fff" : "#ff5555"}
-                  />
-                </IconButton>
-                <IconButton
-                  sx={{
-                    ":hover": { bgcolor: "#f1fa8c25" },
-                  }}
-                  onClick={async (event) => {
-                    await updateAnimeList(
-                      listStatuses.seeLater,
-                      dataAnimeList,
-                      "seeLater"
-                    );
-                    handleUpdateStatuses("seeLater");
-                  }}
-                >
-                  <MdOutlineAccessTimeFilled
-                    color={listStatuses.seeLater !== true ? "#fff" : "#f1fa8c"}
-                  />
-                </IconButton>
-                <IconButton
-                  sx={{
-                    ":hover": { bgcolor: "#bd93f925" },
-                  }}
-                  onClick={async () => {
-                    await updateAnimeList(
-                      listStatuses.watching,
-                      dataAnimeList,
-                      "watching"
-                    );
-                    handleUpdateStatuses("watching");
-                  }}
-                >
-                  <MdRemoveRedEye
-                    color={listStatuses.watching != true ? "#fff" : "#bd93f9"}
-                  />
-                </IconButton>
-                <IconButton
-                  sx={{
-                    ":hover": { bgcolor: "#ffb86c25" },
-                  }}
-                  onClick={async () => {
-                    updateAnimeList(
-                      listStatuses.dropped,
-                      dataAnimeList,
-                      "dropped"
-                    );
-                    handleUpdateStatuses("dropped");
-                  }}
-                >
-                  <BsTrash2Fill
-                    color={listStatuses.dropped !== true ? "#fff" : "#ffb86c"}
-                  />
-                </IconButton>
+                <Typography component={"p"}>
+                  {animeData.genresList.join().replaceAll(",", ", ")}
+                </Typography>
+              </Box>
+              <Box>
+                <Rating
+                  name="animeRating"
+                  value={4.5}
+                  precision={0.5}
+                  readOnly
+                  mt={"100%"}
+                />
+                <Box>
+                  <IconButton
+                    sx={{
+                      ":hover": { bgcolor: "#ff555525" },
+                    }}
+                    onClick={async () => {
+                      updateAnimeList(
+                        listStatuses.favorites,
+                        dataAnimeList,
+                        "favorites"
+                      );
+                      handleUpdateStatuses("favorites");
+                    }}
+                  >
+                    <MdFavorite
+                      color={
+                        listStatuses.favorites !== true ? "#fff" : "#ff5555"
+                      }
+                    />
+                  </IconButton>
+                  <IconButton
+                    sx={{
+                      ":hover": { bgcolor: "#f1fa8c25" },
+                    }}
+                    onClick={async (event) => {
+                      await updateAnimeList(
+                        listStatuses.seeLater,
+                        dataAnimeList,
+                        "seeLater"
+                      );
+                      handleUpdateStatuses("seeLater");
+                    }}
+                  >
+                    <MdOutlineAccessTimeFilled
+                      color={
+                        listStatuses.seeLater !== true ? "#fff" : "#f1fa8c"
+                      }
+                    />
+                  </IconButton>
+                  <IconButton
+                    sx={{
+                      ":hover": { bgcolor: "#bd93f925" },
+                    }}
+                    onClick={async () => {
+                      await updateAnimeList(
+                        listStatuses.watching,
+                        dataAnimeList,
+                        "watching"
+                      );
+                      handleUpdateStatuses("watching");
+                    }}
+                  >
+                    <MdRemoveRedEye
+                      color={listStatuses.watching != true ? "#fff" : "#bd93f9"}
+                    />
+                  </IconButton>
+                  <IconButton
+                    sx={{
+                      ":hover": { bgcolor: "#ffb86c25" },
+                    }}
+                    onClick={async () => {
+                      updateAnimeList(
+                        listStatuses.dropped,
+                        dataAnimeList,
+                        "dropped"
+                      );
+                      handleUpdateStatuses("dropped");
+                    }}
+                  >
+                    <BsTrash2Fill
+                      color={listStatuses.dropped !== true ? "#fff" : "#ffb86c"}
+                    />
+                  </IconButton>
+                </Box>
               </Box>
             </Box>
             <Box className={styles.episodesList}>
@@ -213,7 +222,7 @@ export default function AnimePage(props) {
               </Box>
             </Box>
             <Box className={styles.description}>
-              <Typography variant="body1">{animeData.synopsis}</Typography>
+              <Typography variant="body2">{animeData.synopsis}</Typography>
             </Box>
           </Box>
           <Box className={styles.recommendations}>
