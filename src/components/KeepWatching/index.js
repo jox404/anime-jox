@@ -52,7 +52,7 @@ const animeList = [
   },
 ];
 
-const watching = [1, 13593, 43108];
+const watching = [43806, 13593, 13893];
 
 export default function KeepWatching() {
   const [animesWatchingData, setAnimesWatchingData] = useState([]);

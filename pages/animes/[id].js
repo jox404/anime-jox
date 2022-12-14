@@ -31,7 +31,7 @@ export async function getStaticProps(context) {
   try {
     const id = context.params.id;
     const data = await getAnimeData(id);
-    console.log(id, data, "id & data");
+
     return {
       props: {
         data: data,
@@ -45,16 +45,10 @@ export async function getStaticProps(context) {
 export default function Anime(props) {
   const router = useRouter();
   const { id } = router.query;
-  console.log(id, "id");
-  console.log(router.isFallback, " router.isFallback,");
-  console.log(props.data, "props.data");
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <>
-      {/* {props.data === undefined ? (
+      {props.data === undefined ? (
         <>
           <Box
             sx={{
@@ -74,7 +68,7 @@ export default function Anime(props) {
         </>
       ) : (
         <AnimePage id={id} animeData={props.data} />
-      )} */}
+      )}
     </>
   );
 }
