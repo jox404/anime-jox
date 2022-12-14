@@ -31,7 +31,7 @@ export async function getStaticProps(context) {
   try {
     const id = context.params.id;
     const data = await getAnimeData(id);
-    console.log(id, data);
+    console.log(id, data, "id & data");
     return {
       props: {
         data: data,
@@ -54,7 +54,7 @@ export default function Anime(props) {
 
   return (
     <>
-      {props.data === undefined ? (
+      {/* {props.data === undefined ? (
         <>
           <Box
             sx={{
@@ -74,7 +74,7 @@ export default function Anime(props) {
         </>
       ) : (
         <AnimePage id={id} animeData={props.data} />
-      )}
+      )} */}
     </>
   );
 }
