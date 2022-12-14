@@ -40,6 +40,10 @@ export async function getStaticProps(context) {
 export default function Anime(props) {
   const router = useRouter();
   const { id } = router.query;
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       {props.data === undefined ? (
