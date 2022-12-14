@@ -28,18 +28,26 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const id = context.params.id;
-  const data = await getAnimeData(id);
-  return {
-    props: {
-      data: data,
-    },
-  };
+  try {
+    const id = context.params.id;
+    const data = await getAnimeData(id);
+    console.log(id, data);
+    return {
+      props: {
+        data: data,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export default function Anime(props) {
   const router = useRouter();
   const { id } = router.query;
+  console.log(id, "id");
+  console.log(router.isFallback, " router.isFallback,");
+  console.log(props.data, "props.data");
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
