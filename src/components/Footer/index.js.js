@@ -144,18 +144,6 @@ export default function Footer() {
             ></Box>
           </Box>
         </Container>
-        <Container maxWidth={"lg"} sx={{ display: "flex" }}>
-          <Typography variant="h1" fontSize={25}>
-            About Me
-          </Typography>
-          <Typography variant="body2" fontSize={15} textAlign={"center"}>
-            Estou em busca do meu primeiro sim, para dar andamento na busca
-            pelos meus sonhos. Sou desenvolvedor full stack/junior, moro em São
-            Paulo/SP sou formado em Analise e desenvolvimento de sistemas pela
-            Estácio de Sá. Hoje meu foco é no estudo das tecnologias que cercam
-            o Javascript tanto no front quanto no back.
-          </Typography>
-        </Container>
       </Box>
     </>
   );

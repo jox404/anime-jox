@@ -5,6 +5,7 @@ import {
   Popular,
   CustomSearch,
   KeepWatching,
+  AboutMe,
 } from "../src/components";
 import getFilters from "../src/connections/kitsuApi/getFilters";
 import getMostPopular from "../src/connections/kitsuApi/getMostPopular";
@@ -32,6 +33,7 @@ export default function Home({ popular, categories, genres }) {
         <CustomSearch categories={categories} genres={genres} />
         <Popular animeList={popular} />
         <KeepWatching />
+        <AboutMe />
       </Container>
     </Box>
   );

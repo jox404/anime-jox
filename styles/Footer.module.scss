@@ -6,15 +6,6 @@
   flex-direction: column;
   align-items: center;
 
-  > :last-child {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
-    max-width: 850px;
-  }
-
   a {
     transition: 0.5s;
     color: #e4e4e4;
@@ -28,7 +19,6 @@
 
 .container {
   user-select: text;
-  /*  height: 150px; */
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -36,6 +26,5 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /*  max-width: 250px; */
   }
 }

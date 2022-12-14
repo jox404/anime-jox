@@ -12,6 +12,7 @@ import Search from "./Search";
 import KeepWatching from "./KeepWatching";
 import AnimeListDrawer from "./Drawers/AnimeListDrawer";
 import UserDrawer from "./Drawers/UserDrawer";
+import AboutMe from "./AboutMe";
 
 export {
   SideBar,
@@ -28,4 +29,5 @@ export {
   KeepWatching,
   UserDrawer,
   AnimeListDrawer,
+  AboutMe,
 };
