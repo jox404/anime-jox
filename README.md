@@ -8,7 +8,7 @@ Essa é a segunda versão desse projeto, quando fiz a primeira ainda não tinha 
 
 # ONDE ACESSAR O PROJETO
 
-Você pode acessar https://jox404.github.io/anime-jox/.
+Você pode acessar https://anime-jox.vercel.app/.
 
 # QUERO IMPLEMENTAR LOCALMENTE
 
