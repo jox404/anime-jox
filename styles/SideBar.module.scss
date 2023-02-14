@@ -27,6 +27,10 @@
         a {
           display: flex;
           align-items: center;
+          > :first-child {
+            width: 80px;
+            height: 80px;
+          }
         }
       }
       .list {
@@ -40,6 +44,10 @@
         .userDrawerInBottom {
           display: flex;
           margin-top: auto;
+        }
+        .userLoginBottom {
+          margin-top: 10px;
+          min-height: 35px;
         }
       }
       .yourList {
@@ -96,6 +104,14 @@
 @media only screen and (max-width: 900px) {
   .container {
     width: 50px;
+    .logo {
+      a {
+        > :first-child {
+          width: 50px !important;
+          height: 50px !important;
+        }
+      }
+    }
   }
   .drawer {
     width: 300px;

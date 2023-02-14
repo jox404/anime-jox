@@ -208,7 +208,7 @@ const SideBar = (props) => {
         <Box className={styles.top}>
           <Box className={styles.logo}>
             <Box href={"/"} component={"a"}>
-              <Image src={logo} width={80} height={80} alt={"logo"} />
+              <Image src={logo} alt={"logo"} />
             </Box>
           </Box>
           <Box
@@ -335,9 +335,8 @@ const SideBar = (props) => {
                 {user === null ? (
                   <ListItem
                     selected={false}
+                    className={styles.userLoginBottom}
                     sx={{
-                      marginTop: 1,
-                      minHeight: "35px",
                       justifyContent: {
                         xs: "center",
                         md: "flex-start",
@@ -348,7 +347,10 @@ const SideBar = (props) => {
                     <ListItemIcon sx={{ m: { xs: "auto auto", md: 1 } }}>
                       <RiLoginBoxFill />
                     </ListItemIcon>
-                    <ListItemText primary={"Sign in/Sign up"} />
+                    <ListItemText
+                      primary={"Sign in/Sign up"}
+                      sx={{ display: { xs: "none", md: "flex" } }}
+                    />
                   </ListItem>
                 ) : (
                   <>
