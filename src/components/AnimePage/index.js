@@ -109,7 +109,7 @@ export default function AnimePage(props) {
             }}
           >
             <Box className={styles.image}>
-              <img src={animeData.posterImage}></img>
+              <img src={animeData.posterImage} />
             </Box>
             <Box className={styles.infos}>
               <Box>
@@ -216,7 +216,10 @@ export default function AnimePage(props) {
               </Box>
             </Box>
             <Box className={styles.episodesList}>
-              <Typography component={"h2"}>Episodes</Typography>
+              <Typography component={"h2"}>
+                {" "}
+                <strong>Episodes</strong>
+              </Typography>
               <Box className={styles.containerEpisodes}>
                 <EpisodesList animeData={animeData.episodesList} />
               </Box>

@@ -36,7 +36,7 @@ export default function CardAnime(props) {
         size === "large"
           ? {
               height: { xs: length / 2, lg: length / 1.25, xl: length },
-              width: "100%",
+              width: { xs: length, sm: "100%" },
             }
           : size === "medium"
           ? {
@@ -50,7 +50,7 @@ export default function CardAnime(props) {
             }
           : {
               height: length,
-              width: length,
+              width: { xs: length, sm: length },
             },
       ]}
       component={"a"}

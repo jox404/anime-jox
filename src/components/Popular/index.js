@@ -44,8 +44,8 @@ export default function Popular(props) {
                   item
                   key={index}
                   xs={index === 0 || index === 1 ? 12 : 6}
-                  sm={index === 0 || index === 1 ? 6 : 6}
-                  md={index === 0 || index === 1 ? 6 : 3}
+                  sm={index === 0 || index === 1 ? 6 : 4}
+                  md={index === 0 || index === 1 ? 6 : 4}
                   lg={index === 0 || index === 1 ? 6 : 2}
                   xl={index === 0 || index === 1 ? 6 : 2}
                   sx={{

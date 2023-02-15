@@ -29,10 +29,14 @@ export default function EpisodesList(props) {
                 />
               </Box>
               <Box className={styles.txt}>
-                <Typography variant="subtitle1">
-                  {anime.title || "???"}
+                <Typography variant="subtitle1" fontSize={15}>
+                  <strong> {anime.title || "???"}</strong>
                 </Typography>
-                <Typography variant="subtitle2" sx={{ overflowY: "auto" }}>
+                <Typography
+                  variant="subtitle2"
+                  fontSize={15}
+                  sx={{ overflowY: "auto" }}
+                >
                   {anime.synopsis || ""}
                 </Typography>
               </Box>

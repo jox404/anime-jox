@@ -87,7 +87,10 @@ export default function KeepWatching() {
             >
               <Typography
                 variant="h4"
-                textAlign={index % 2 !== 0 ? "left" : "right"}
+                textAlign={{
+                  sx: "left",
+                  sm: index % 2 !== 0 ? "left" : "right",
+                }}
                 fontSize={24}
                 fontWeight={600}
                 m={"10px 0px"}
@@ -102,8 +105,9 @@ export default function KeepWatching() {
                   justifyContent: "space-between",
                   alignItems: "center",
                 }}
+                gap={"5px"}
               >
-                <Grid item xs={2} sm={3} md={5} lg={5}>
+                <Grid item xs={12} sm={5.4} lg={5}>
                   <CardAnime
                     bgImage={anime.coverImage}
                     id={anime.id}
@@ -113,7 +117,7 @@ export default function KeepWatching() {
                 {anime.episodesList.map((episode, index) => {
                   if (index <= 2) {
                     return (
-                      <Grid item xs={2} sm={3} md={3} lg={2} key={index}>
+                      <Grid item xs={3.8} sm={2} lg={2} key={index}>
                         <CardAnime
                           bgImage={episode.thumbnail}
                           id={anime.id}

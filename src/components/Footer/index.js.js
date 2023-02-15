@@ -16,7 +16,11 @@ export default function Footer() {
         <Container
           maxWidth={"lg"}
           className={styles.container}
-          sx={{ display: "flex" }}
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            justifyContent: "space-between",
+          }}
         >
           <Box>
             <Box>
@@ -49,7 +53,50 @@ export default function Footer() {
 
           <Box>
             <Box>
-              <Typography variant="h6">Contact</Typography>
+              <Typography variant="h6">
+                {" "}
+                <strong>Other Projects</strong>
+              </Typography>
+              <Typography
+                variant="body2"
+                component={"a"}
+                href={"https://jox404.github.io/portifolio/"}
+              >
+                My Portifolio
+              </Typography>
+              <br />
+              <Typography
+                variant="body2"
+                component={"a"}
+                href={"https://jox404.github.io/photographer-portfolio/"}
+              >
+                Photographer Portfolio
+              </Typography>{" "}
+              <br />
+              <Typography
+                variant="body2"
+                component={"a"}
+                href={"https://github.com/jox404/weather-app"}
+              >
+                Weather App
+              </Typography>{" "}
+              <br />
+              <Typography
+                variant="body2"
+                component={"a"}
+                href={"https://jox404.github.io/portifolio/"}
+              >
+                Bolsa de Atletas
+              </Typography>{" "}
+              {/* <br /> */}
+            </Box>
+          </Box>
+          <Box>
+            <Box>
+              <Typography variant="h6">
+                {" "}
+                <strong>Contact</strong>
+              </Typography>
               <Typography variant="body2">
                 <strong> Email:</strong>joaovitorribeiroc1@gmail.com
               </Typography>
@@ -97,51 +144,6 @@ export default function Footer() {
                 <CgWebsite />
               </Link>
             </Box>
-          </Box>
-          <Box>
-            <Box>
-              <Typography variant="h6">Other Projects</Typography>
-              <Typography
-                variant="body2"
-                component={"a"}
-                href={"https://jox404.github.io/portifolio/"}
-              >
-                <strong>My Portifolio </strong>
-              </Typography>
-              <br />
-              <Typography
-                variant="body2"
-                component={"a"}
-                href={"https://jox404.github.io/photographer-portfolio/"}
-              >
-                <strong>Photographer Portfolio</strong>
-              </Typography>{" "}
-              <br />
-              <Typography
-                variant="body2"
-                component={"a"}
-                href={"https://github.com/jox404/weather-app"}
-              >
-                <strong>Weather App</strong>
-              </Typography>{" "}
-              <br />
-              <Typography
-                variant="body2"
-                component={"a"}
-                href={"https://jox404.github.io/portifolio/"}
-              >
-                <strong>Bolsa de Atletas</strong>
-              </Typography>{" "}
-              <br />
-            </Box>
-            <Box
-              mt={3}
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                maxWidth: "90px",
-              }}
-            ></Box>
           </Box>
         </Container>
       </Box>

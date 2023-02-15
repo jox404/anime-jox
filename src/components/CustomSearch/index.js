@@ -80,25 +80,27 @@ export default function CustomSearch(props) {
       <Box
         sx={{ display: "flex", mt: 5, mb: 5, justifyContent: "space-between" }}
       >
-        <Filter
-          title={"Category"}
-          list={categories}
-          setData={setCategoryFilter}
-          value={categoryFilter}
-        />
-        <Filter
-          title={"Genre"}
-          list={genres}
-          setData={setGenreFilter}
-          value={genreFilter}
-        />
-        <Filter
-          title={"Season"}
-          list={season}
-          setData={setSeasonFilter}
-          value={seasonFilter}
-        />
-        <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+        <Box className={styles.filters}>
+          <Filter
+            title={"Category"}
+            list={categories}
+            setData={setCategoryFilter}
+            value={categoryFilter}
+          />
+          <Filter
+            title={"Genre"}
+            list={genres}
+            setData={setGenreFilter}
+            value={genreFilter}
+          />
+          <Filter
+            title={"Season"}
+            list={season}
+            setData={setSeasonFilter}
+            value={seasonFilter}
+          />
+        </Box>
+        <Box>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               views={["year"]}
@@ -157,24 +159,23 @@ export default function CustomSearch(props) {
               }}
             />
           </LocalizationProvider>
+          <Button
+            onClick={() =>
+              makeSearch(
+                false,
+                18,
+                genreFilter,
+                categoryFilter,
+                seasonFilter,
+                yearFromFilter,
+                yearToFilter
+              )
+            }
+            variant={"contained"}
+          >
+            Search
+          </Button>
         </Box>
-
-        <Button
-          onClick={() =>
-            makeSearch(
-              false,
-              18,
-              genreFilter,
-              categoryFilter,
-              seasonFilter,
-              yearFromFilter,
-              yearToFilter
-            )
-          }
-          variant={"contained"}
-        >
-          Search
-        </Button>
       </Box>
 
       <Box mt={2} sx={{ minHeight: 0 }}>
@@ -190,7 +191,7 @@ export default function CustomSearch(props) {
                 <Grid
                   item
                   key={index + "card"}
-                  xs={12}
+                  xs={6}
                   sm={4}
                   md={4}
                   lg={2}

@@ -61,10 +61,20 @@ export default function HighLights(props) {
           >
             <Container maxWidth={"lg"}>
               <Box className={styles.animeDescription}>
-                <Typography variant="h2" fontSize={55} fontWeight={700}>
+                <Typography
+                  variant="h2"
+                  fontSize={{ xs: 35, sm: 55 }}
+                  fontWeight={700}
+                  sx={{ textShadow: "1px 1px #000000" }}
+                >
                   {anime.title}
                 </Typography>
-                <Typography variant="caption" className={styles.resume}>
+                <Typography
+                  variant="caption"
+                  className={styles.resume}
+                  fontSize={{ sx: 12, sm: 18 }}
+                  sx={{ textShadow: "1px 1px #000000" }}
+                >
                   {limitCharacters(anime.synopsis, 200)}
                 </Typography>
                 <div className={styles.btnContainer}>
@@ -80,22 +90,18 @@ export default function HighLights(props) {
               </Box>
               <Box className={[styles.bottomDescription]}>
                 <Box>
-                  <Typography component={"h6"}>Rating</Typography>
+                  <Typography
+                    component={"h6"}
+                    sx={{ textShadow: "1px 1px #000000" }}
+                  >
+                    Rating
+                  </Typography>
                   <Rating
                     name="animeRating"
                     value={parseFloat(anime.averageRating)}
                     precision={0.5}
                     readOnly
                   />
-                </Box>
-                <Box>
-                  <Typography component={"h6"}>Genres</Typography>
-                  <Box className={styles.genresList}>
-                    {limitCharacters(
-                      anime.genresList.join().replaceAll(",", ", "),
-                      100
-                    )}
-                  </Box>
                 </Box>
               </Box>
             </Container>
