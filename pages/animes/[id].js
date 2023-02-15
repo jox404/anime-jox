@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { AnimePage } from "../../src/components/index";
 import getAnimeData from "../../src/connections/kitsuApi/getAnimeData";
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
   return {
     paths: [
       {
@@ -28,6 +28,21 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
+  try {
+    const id = context.params.id;
+    const data = await getAnimeData(id);
+
+    return {
+      props: {
+        data: data,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+  }
+} */
+
+export async function getServerSideProps(context) {
   try {
     const id = context.params.id;
     const data = await getAnimeData(id);
