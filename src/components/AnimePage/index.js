@@ -82,14 +82,11 @@ export default function AnimePage(props) {
     );
     setRecommendations(data);
   };
-  getRecommendations();
-
   useEffect(() => {
     updateUserAnimeData();
-  }, []);
-  useEffect(() => {
+    getRecommendations();
     InitialStatuses();
-  }, [userAnimeData]);
+  }, []);
 
   return (
     <>

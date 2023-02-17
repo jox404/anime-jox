@@ -1,6 +1,8 @@
+import { async } from "@firebase/util";
 import { CircularProgress, LinearProgress } from "@mui/material";
 import { bgcolor, Box, Stack } from "@mui/system";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { AnimePage } from "../../src/components/index";
 import getAnimeData from "../../src/connections/kitsuApi/getAnimeData";
 
@@ -45,7 +47,7 @@ export async function getStaticProps(context) {
 export async function getServerSideProps(context) {
   try {
     const id = context.params.id;
-    const data = await getAnimeData(id);
+    const data = null; /* await getAnimeData(id); */
 
     return {
       props: {
@@ -60,10 +62,17 @@ export async function getServerSideProps(context) {
 export default function Anime(props) {
   const router = useRouter();
   const { id } = router.query;
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    (async () => {
+      const result = await getAnimeData(id);
+      setData(result);
+    })();
+  }, []);
 
   return (
     <>
-      {props.data === undefined ? (
+      {!data ? (
         <>
           <Box
             sx={{
@@ -82,7 +91,7 @@ export default function Anime(props) {
           </Box>
         </>
       ) : (
-        <AnimePage id={id} animeData={props.data} />
+        <AnimePage id={id} animeData={data} />
       )}
     </>
   );
