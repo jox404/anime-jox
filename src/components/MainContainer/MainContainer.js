@@ -21,11 +21,11 @@ export default function MainContainer({ children }, props) {
             ? { width: "100vw" }
             : {
                 width: {
-                  xs: "calc(100vw - 50px)",
+                  xs: "calc(100vw)",
                   md: "calc(100vw - 300px)",
                 },
                 marginLeft: {
-                  xs: "50px",
+                  xs: "0px",
                   md: "300px",
                 },
               }

@@ -1,7 +1,6 @@
 .container {
   width: 300px;
   height: 100vh;
-  background-color: #101010;
   user-select: none;
   position: fixed;
   z-index: 2;
@@ -9,10 +8,9 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    z-index: 2;
     height: 100vh;
     padding: 10px 0px;
-    background-color: #101010;
+    background-color: #161616;
     .top {
       height: 100%;
       display: flex;
@@ -20,7 +18,7 @@
       flex-direction: column;
       .logo {
         justify-content: center;
-        display: flex;
+        display: /* flex */ none;
         align-items: center;
         padding: 0px;
         margin: 20px 0px;
@@ -39,7 +37,6 @@
         width: 100%;
         padding: 0;
         align-items: center;
-        /* margin: 15px 0px; */
 
         .userDrawerInBottom {
           display: flex;
@@ -53,6 +50,7 @@
       .yourList {
         overflow-x: scroll;
         background-color: aqua;
+        display: none;
       }
     }
   }
@@ -122,6 +120,9 @@
     }
     100% {
       margin-left: 50px;
+      @media only screen and(max-width:600px) {
+        margin-left: 0px;
+      }
     }
   }
 
@@ -133,6 +134,40 @@
     100% {
       margin-left: -350px;
       display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 0%;
+    .menu {
+      width: calc(100vw - 40px);
+      position: absolute;
+      background-color: #000000f3;
+      box-shadow: 0px 0px 10px 0px #ffffff21;
+      height: 50px;
+      z-index: 2;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin: 0px 20px;
+      margin-bottom: 5px;
+      border-radius: 20px;
+      bottom: 0px;
+      .top {
+        flex-direction: row;
+        align-items: center;
+        .list {
+          flex-direction: row;
+          .userDrawerInBottom {
+            display: none;
+          }
+          .userLoginBottom {
+            margin: 0px;
+          }
+        }
+      }
     }
   }
 }
